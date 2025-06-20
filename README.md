@@ -259,9 +259,9 @@
                     <ul class="flex flex-wrap justify-center space-x-4 space-x-reverse md:space-x-6 md:space-x-reverse mt-4 md:mt-0">
                         <li><a href="#hero" class="nav-link text-lg font-medium">الرئيسية</a></li>
                         <li><a href="#news-feed" class="nav-link text-lg font-medium">الأخبار</a></li>
-                        <li><a href="#" class="nav-link text-lg font-medium">الذكاء الاصطناعي</a></li>
-                        <li><a href="#" class="nav-link text-lg font-medium">التقنية</a></li>
-                        <li><a href="#contact-us" class="nav-link text-lg font-medium">تواصل معنا</a></li>
+                        <li><a href="#news-feed" class="nav-link text-lg font-medium">الذكاء الاصطناعي</a></li>
+                        <li><a href="#news-feed" class="nav-link text-lg font-medium">التقنية</a></li>
+                        <li><a href="#newsletter-subscription" class="nav-link text-lg font-medium">تواصل معنا</a></li>
                     </ul>
                 </div>
                 <!-- Search Bar - Large and Below Navigation Links -->
@@ -435,7 +435,7 @@
     </section>
 
     <!-- Newsletter Subscription Section -->
-    <section class="bg-orange-100 py-16 px-6 md:px-12 text-center rounded-lg shadow-inner mx-auto max-w-4xl fade-in-slide-rtl" style="background-color: #EEDC82; margin-top: 4rem; margin-bottom: 4rem;">
+    <section id="newsletter-subscription" class="bg-orange-100 py-16 px-6 md:px-12 text-center rounded-lg shadow-inner mx-auto max-w-4xl fade-in-slide-rtl" style="background-color: #EEDC82; margin-top: 4rem; margin-bottom: 4rem;">
         <h2 class="text-4xl font-bold text-gray-800 mb-6">اشترك في نشرتنا الإخبارية</h2>
         <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
             احصل على أحدث الأخبار والمقالات حول الذكاء الاصطناعي مباشرة في صندوق بريدك الوارد.
