@@ -94,7 +94,7 @@
             width: 100%;
             left: 0; /* For RTL */
         }
-
+‏<!-- start feedwind code --> <script type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading" data-fw-param="173651/"></script> <!-- end feedwind code -->
         /* Button hover effect */
         .btn-primary {
             transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
