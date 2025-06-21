@@ -6,7 +6,7 @@
     <title>موسوعة الشعر العراقي</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons (Hamburger, Search, Social Media) -->
+    <!-- Font Awesome for icons (Hamburger, Search, Social Media, Copy) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Custom Colors and Fonts */
@@ -18,16 +18,16 @@
             --dark-heading: #222222; /* Black for headings */
             --body-text: #444444; /* Dark gray for body text */
             --button-default-text: #000000; /* Black text on default buttons */
-            --button-bg-default: #E0E0E0; /* Light gray for default button background, to allow black text */
+            --button-bg-default: #E0E0E0; /* Light gray for default button background */
             --button-hover-bg: #FFA500; /* Orange background on button hover/active */
             --button-hover-text: white; /* White text on orange buttons */
-            --footer-bg: #222831; /* Dark blue/black for footer */
+            --footer-bg: #222831; /* Dark blue/black for footer, as per request */
             --footer-text: #EEEEEE; /* Light text for footer */
             --footer-link-hover: #FFA500; /* Orange hover for footer links */
             --poet-card-border: #8B5E3C; /* Warm brown for poet card border */
-            --modal-bg: #FFF2E0; /* Same as main background for modal */
             --copy-button-bg: #00ADB5; /* Turquoise for copy button */
             --copy-button-hover-bg: #008C99; /* Darker turquoise on hover */
+            --hamburger-bg: rgba(255, 255, 255, 0.7); /* Slightly translucent white for hamburger background */
         }
 
         body {
@@ -125,12 +125,15 @@
             font-size: 2.2rem;
             cursor: pointer;
             padding: 0.5rem;
-            transition: color 0.2s ease;
+            transition: color 0.2s ease, background-color 0.2s ease, border-radius 0.2s ease;
             flex-shrink: 0; /* Don't shrink */
             margin-right: 0.5rem; /* Space from search bar */
+            background-color: var(--hamburger-bg); /* Explicit background */
+            border-radius: 8px; /* Slightly rounded */
         }
         .hamburger-toggle:hover {
             color: var(--accent-orange);
+            background-color: rgba(255, 165, 0, 0.1); /* Subtle hover for background */
         }
 
         /* --- Hero Section Styles --- */
@@ -185,59 +188,38 @@
             color: var(--accent-orange); /* Text color change on hover */
         }
 
-        /* --- Poet Detail Modal (The "Second Layer") --- */
-        .poet-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for strong layering effect */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .poet-modal.open {
-            opacity: 1;
-            visibility: visible;
-        }
-        .poet-modal-content {
-            background-color: var(--modal-bg); /* Same as main background */
-            border-radius: 15px;
-            padding: 2.5rem;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh; /* Limit height for scrolling */
-            overflow-y: auto;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-            transform: translateY(30px); /* Appear from slightly below */
-            opacity: 0;
-            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-        }
-        .poet-modal.open .poet-modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .close-modal-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px; /* Position from left in RTL */
-            font-size: 2.5rem;
-            color: var(--dark-heading);
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .close-modal-btn:hover {
-            color: var(--accent-orange);
+        /* --- Poet Detail Page (New Section, not Modal) --- */
+        #poet-detail-page {
+            background-color: var(--main-bg); /* Same as main background */
+            padding: 2.5rem 1.5rem; /* Consistent padding */
+            border-radius: 15px; /* Rounded corners for the "page" itself */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin-top: 2rem; /* Space from header */
+            position: relative; /* For the "Back to Poets" button */
+            min-height: 80vh; /* Ensure it looks like a full page */
         }
 
-        /* Poet Detail Content within Modal */
-        #poet-detail-name {
+        #poet-detail-page .back-to-poets-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--button-bg-default);
+            color: var(--button-default-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #poet-detail-page .back-to-poets-btn:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--button-hover-text);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Poet Detail Content */
+        #poet-detail-name-display {
             font-size: 3rem;
             font-weight: 800;
             color: var(--dark-heading);
@@ -246,7 +228,7 @@
             border-bottom: 2px solid var(--accent-orange); /* Underline for name */
             padding-bottom: 10px;
         }
-        #poet-detail-bio {
+        #poet-detail-bio-display {
             font-size: 1.1rem;
             color: var(--body-text);
             line-height: 2;
@@ -255,7 +237,7 @@
             text-align: justify;
         }
 
-        /* Category Buttons within Modal */
+        /* Category Buttons within Poet Detail Page */
         .category-pill {
             background-color: var(--button-bg-default); /* Default light gray */
             color: var(--button-default-text); /* Black text */
@@ -273,7 +255,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        /* Individual Poem Display (Full Text Directly) within Modal */
+        /* Individual Poem Display (Full Text Directly) within Poet Detail Page */
         .poem-full-card {
             background-color: white; /* White background for poem cards */
             border-radius: 10px;
@@ -326,33 +308,6 @@
             font-size: 1rem;
         }
 
-        /* --- Floating "Back to Home" Button --- */
-        #back-to-home-btn {
-            position: fixed;
-            top: 100px; /* Below the header */
-            right: 20px;
-            background-color: var(--accent-brown); /* Consistent with theme */
-            color: white;
-            padding: 12px 20px;
-            border-radius: 9999px;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            z-index: 40;
-            opacity: 0;
-            visibility: hidden;
-            display: none; /* Hidden by default, shown by JS */
-        }
-        #back-to-home-btn.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(0);
-        }
-        #back-to-home-btn:hover {
-            background-color: var(--accent-orange);
-            transform: translateY(-2px);
-        }
-
         /* --- Mobile Sidebar Menu --- */
         #mobile-sidebar {
             position: fixed;
@@ -398,6 +353,65 @@
             cursor: pointer;
         }
 
+        /* --- Footer Styles --- */
+        .site-footer {
+            background-color: var(--footer-bg); /* Dark background */
+            color: var(--footer-text); /* Light text */
+            padding: 3rem 1.5rem;
+            text-align: center;
+            margin-top: 4rem; /* Space from main content */
+        }
+        .site-footer .footer-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .site-footer .footer-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+        .site-footer .copyright-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .site-footer .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .site-footer .footer-links a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .site-footer .footer-links a:hover {
+            color: var(--footer-link-hover);
+            text-decoration: underline;
+        }
+        .site-footer .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .site-footer .social-icons a {
+            color: var(--footer-text);
+            font-size: 2.5rem; /* Larger icons */
+            transition: color 0.2s ease, transform 0.2s ease;
+            text-decoration: none; /* Remove underline from icons */
+            display: flex; /* To center icon if text is added later */
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .site-footer .social-icons a:hover {
+            color: var(--footer-link-hover);
+            transform: translateY(-3px); /* Slight lift on hover */
+        }
+
         /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
             .fixed-header {
@@ -427,9 +441,15 @@
 
             .poet-grid-card h3 { font-size: 1.6rem; }
 
-            .poet-modal-content { width: 95%; padding: 1.5rem; }
-            #poet-detail-name { font-size: 2rem; margin-bottom: 1rem; }
-            #poet-detail-bio { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; padding: 0;}
+            #poet-detail-page { padding: 1.5rem 1rem; margin-top: 1rem; }
+            #poet-detail-page .back-to-poets-btn {
+                top: 15px;
+                right: 15px;
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            #poet-detail-name-display { font-size: 2rem; margin-bottom: 1rem; }
+            #poet-detail-bio-display { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; padding: 0;}
             .category-pill { padding: 0.5rem 1rem; font-size: 0.85rem; }
             .poem-full-card h4 { font-size: 1.4rem; }
             .poem-full-card .poem-text { font-size: 1rem; line-height: 1.8;}
@@ -442,10 +462,29 @@
                 font-size: 0.9rem;
             }
 
-            #back-to-home-btn {
-                top: 80px; /* Adjust for smaller header height */
-                padding: 10px 15px;
+            .site-footer {
+                padding: 2rem 1rem;
+            }
+            .site-footer .footer-title {
+                font-size: 2rem;
+            }
+            .site-footer .footer-description {
                 font-size: 0.9rem;
+            }
+            .site-footer .copyright-text {
+                font-size: 0.8rem;
+            }
+            .site-footer .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .site-footer .social-icons {
+                flex-direction: row; /* Keep social icons horizontal */
+                gap: 1.5rem;
+            }
+            .site-footer .social-icons a {
+                font-size: 2rem;
             }
         }
     </style>
@@ -466,13 +505,9 @@
         <button id="hamburger-menu-toggle" class="hamburger-toggle">
             <i class="fas fa-bars"></i>
         </button>
-
-        <!-- Desktop Navigation Links (Hidden, as per request) -->
-        <!-- This area is technically part of the 'header' but will not display desktop nav items -->
-        <!-- The user explicitly asked for Hamburger for ALL navigation -->
     </header>
 
-    <!-- Mobile Sidebar Menu (Also serves as the main navigation for all screens) -->
+    <!-- Mobile Sidebar Menu (Serves as the main navigation for all screens) -->
     <div id="mobile-sidebar">
         <button class="close-btn" onclick="closeMobileMenu()">&times;</button>
         <a href="#" data-section="home" onclick="showSection('home')">الصفحة الرئيسية</a>
@@ -487,10 +522,10 @@
 
     <!-- Main Content Area -->
     <main class="container mx-auto px-4">
-        <!-- Offset for fixed header (adjust height if header padding changes) -->
+        <!-- Offset for fixed header -->
         <div class="h-[100px] sm:h-[100px] md:h-[80px]"></div>
 
-        <!-- Hero Section -->
+        <!-- Hero Section - Layer 1 -->
         <section id="home-section" class="content-section active hero-section">
             <h2 class="hero-title hero-text">مرحبًا بك في موسوعة الشعر العراقي</h2>
             <p class="hero-subtitle hero-text">بوابة شاملة لأروع القصائد وأبرز الشعراء العراقيين</p>
@@ -504,19 +539,18 @@
             </div>
         </section>
 
-        <!-- Floating "Back to Home" Button (Appears when poet modal is open) -->
-        <button id="back-to-home-btn" class="hidden" onclick="closePoetModal(); showSection('poets');">
-            العودة للصفحة الرئيسية
-        </button>
-    </main>
+        <!-- Poet Detail Page - Layer 2 (Full page, not a modal) -->
+        <section id="poet-detail-page" class="content-section py-10 sm:py-16 hidden">
+            <!-- Back to Poets List Button -->
+            <button class="back-to-poets-btn" onclick="showSection('poets')">
+                العودة إلى الشعراء
+            </button>
 
-    <!-- Poet Detail Modal/Layer (The "Second Layer") -->
-    <div id="poet-detail-modal" class="poet-modal">
-        <div class="poet-modal-content">
-            <button class="close-modal-btn" onclick="closePoetModal()">&times;</button>
-            <h2 id="poet-detail-name"></h2>
-            <p id="poet-detail-bio"></p>
+            <!-- Poet Info -->
+            <h2 id="poet-detail-name-display" class="mt-10"></h2>
+            <p id="poet-detail-bio-display"></p>
 
+            <!-- Poem Categories -->
             <h3 class="text-3xl font-bold text-dark-heading text-center mb-6 mt-8">قصائد الشاعر</h3>
             <div id="poem-categories" class="flex flex-wrap justify-center gap-3 mb-8">
                 <!-- Category buttons will be generated here -->
@@ -524,33 +558,33 @@
             <div id="poems-display">
                 <!-- Poems with title and full text will load directly here -->
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="bg-footer-bg py-8 text-center mt-10">
-        <div class="container mx-auto px-4">
-            <h4 class="text-footer-text text-3xl sm:text-4xl font-extrabold mb-4">موسوعة الشعر العراقي</h4>
-            <p class="text-footer-text text-base leading-relaxed max-w-4xl mx-auto mb-6">
+    <!-- Footer - Separate Visual Block -->
+    <footer class="site-footer">
+        <div class="container mx-auto">
+            <h4 class="footer-title">موسوعة الشعر العراقي</h4>
+            <p class="footer-description">
                 بوابتك الشاملة لأروع قصائد الشعر الشعبي العراقي، من عمالقة الشعر إلى الأصوات الشابة. نسعى لإثراء الساحة الأدبية وتقديم أرشيف متكامل يعكس جمال وعمق الكلمة العراقية.
             </p>
-            <p class="text-footer-text text-sm mb-4">
-                &copy; <span id="current-year"></span> كرار حيدر. جميع الحقوق محفوظة.
+            <p class="copyright-text">
+                &copy; <span id="current-year-footer"></span> كرار حيدر. جميع الحقوق محفوظة.
             </p>
-            <div class="text-footer-text text-sm mb-4 flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <a href="#" class="hover:underline">سياسة الخصوصية</a>
+            <div class="footer-links">
+                <a href="#">سياسة الخصوصية</a>
                 <span>|</span>
-                <a href="#" class="hover:underline">شروط الاستخدام</a>
+                <a href="#">شروط الاستخدام</a>
             </div>
-            <div class="flex flex-col sm:flex-row justify-center items-center sm:space-x-8 space-y-4 sm:space-y-0 text-2xl text-footer-text mt-4">
-                <a href="https://www.youtube.com/@U1QO1" target="_blank" class="hover:text-footer-link-hover transition-colors flex items-center space-x-2 space-x-reverse">
-                    <i class="fab fa-youtube"></i> <span>@U1QO1</span>
+            <div class="social-icons mt-6">
+                <a href="https://www.youtube.com/@U1QO1" target="_blank" aria-label="YouTube Channel">
+                    <i class="fab fa-youtube"></i>
                 </a>
-                <a href="https://www.instagram.com/k9x9i" target="_blank" class="hover:text-footer-link-hover transition-colors flex items-center space-x-2 space-x-reverse">
-                    <i class="fab fa-instagram"></i> <span>@k9x9i</span>
+                <a href="https://www.instagram.com/k9x9i" target="_blank" aria-label="Instagram Profile">
+                    <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://www.tiktok.com/@c3_i2" target="_blank" class="hover:text-footer-link-hover transition-colors flex items-center space-x-2 space-x-reverse">
-                    <i class="fab fa-tiktok"></i> <span>@c3_i2</span>
+                <a href="https://www.tiktok.com/@c3_i2" target="_blank" aria-label="TikTok Profile">
+                    <i class="fab fa-tiktok"></i>
                 </a>
             </div>
         </div>
@@ -771,12 +805,11 @@
         const contentSections = document.querySelectorAll('.content-section');
 
         const poetsGrid = document.getElementById('poets-grid');
-        const poetDetailModal = document.getElementById('poet-detail-modal');
-        const poetDetailName = document.getElementById('poet-detail-name');
-        const poetDetailBio = document.getElementById('poet-detail-bio');
+        const poetDetailPage = document.getElementById('poet-detail-page'); // Renamed from modal
+        const poetDetailNameDisplay = document.getElementById('poet-detail-name-display'); // Renamed for clarity
+        const poetDetailBioDisplay = document.getElementById('poet-detail-bio-display'); // Renamed for clarity
         const poemCategoriesContainer = document.getElementById('poem-categories');
         const poemsDisplay = document.getElementById('poems-display'); // Where poems (full text) will be shown
-        const backToHomeBtn = document.getElementById('back-to-home-btn');
 
         let currentPoet = null; // Stores the currently selected poet object
 
@@ -810,27 +843,25 @@
 
         // --- Section Switching Logic ---
         function showSection(sectionId) {
-            // Hide all sections
+            // Hide all content sections initially
             contentSections.forEach(section => {
                 section.classList.remove('active');
+                section.classList.add('hidden'); // Ensure it's hidden
             });
-            // Show the selected section
+
+            // Show the target section
             const targetSection = document.getElementById(`${sectionId}-section`);
             if (targetSection) {
-                targetSection.classList.add('active');
+                targetSection.classList.remove('hidden');
+                // Use setTimeout to allow CSS transition to apply after display:block
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+                }, 10);
             }
 
-            // Hide the back-to-home button if on home or poets overview
-            if (sectionId === 'home' || sectionId === 'poets') {
-                backToHomeBtn.style.display = 'none'; // Completely hide
-            } else {
-                backToHomeBtn.style.display = 'block'; // Show if navigating to categories via sidebar
-                backToHomeBtn.classList.add('active');
-            }
-
-            // Scroll to the top of the content area
-            window.scrollTo({ top: mainHeader.offsetHeight, behavior: 'smooth' });
             closeMobileMenu(); // Ensure mobile menu closes
+            // Scroll to the top of the content area, accounting for fixed header
+            window.scrollTo({ top: mainHeader.offsetHeight, behavior: 'smooth' });
         }
 
         // Attach event listeners to mobile navigation links (as they are the primary nav)
@@ -853,7 +884,9 @@
                 const poetCard = document.createElement('div');
                 poetCard.classList.add('poet-grid-card');
                 poetCard.innerHTML = `<h3>${poet.name}</h3>`;
-                poetCard.addEventListener('click', () => openPoetModal(poet));
+                poetCard.addEventListener('click', () => {
+                    displayPoetDetailPage(poet);
+                });
                 poetsGrid.appendChild(poetCard);
             });
         }
@@ -865,29 +898,22 @@
                 poet.name.toLowerCase().includes(searchTerm)
             );
             renderPoetsGrid(filteredPoets);
+            showSection('poets'); // Ensure poets section is visible when searching
         });
 
-        // --- Poet Detail Modal Logic (The "Second Layer") ---
-        function openPoetModal(poet) {
+
+        // --- Display Poet Detail Page (The "Second Layer") ---
+        function displayPoetDetailPage(poet) {
             currentPoet = poet; // Set the current poet
-            poetDetailName.textContent = poet.name;
-            poetDetailBio.textContent = poet.bio;
+            poetDetailNameDisplay.textContent = poet.name;
+            poetDetailBioDisplay.textContent = poet.bio;
             renderPoemCategories(poet.poems); // Render category buttons
 
-            poetDetailModal.classList.add('open');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling body when modal is open
-            backToHomeBtn.style.display = 'block'; // Show floating button
-            backToHomeBtn.classList.add('active');
+            showSection('poet-detail'); // Switch to poet detail page section
+            window.scrollTo({ top: mainHeader.offsetHeight, behavior: 'smooth' }); // Scroll to top of the new page
         }
 
-        function closePoetModal() {
-            poetDetailModal.classList.remove('open');
-            document.body.style.overflow = ''; // Restore body scrolling
-            backToHomeBtn.classList.remove('active');
-            backToHomeBtn.style.display = 'none'; // Hide floating button
-        }
-
-        // Render Poem Categories in Modal
+        // Render Poem Categories on Poet Detail Page
         function renderPoemCategories(poemsByCategories) {
             poemCategoriesContainer.innerHTML = ''; // Clear previous categories
             const categories = Object.keys(poemsByCategories);
@@ -925,7 +951,7 @@
                 poemCategoriesContainer.appendChild(button);
             });
 
-            // Automatically click the first category to show poems on modal open
+            // Automatically click the first category to show poems on page load/poet selection
             if (displayedCategories.length > 0) {
                 // Use a slight delay to ensure categories are rendered before click
                 setTimeout(() => {
@@ -934,7 +960,7 @@
             }
         }
 
-        // Display Poems for a Category (Full Text Directly) within Modal
+        // Display Poems for a Category (Full Text Directly) on Poet Detail Page
         function displayPoemsForCategory(category) {
             poemsDisplay.innerHTML = ''; // Clear previous poems
             if (!currentPoet || !currentPoet.poems[category] || currentPoet.poems[category].length === 0) {
@@ -986,7 +1012,7 @@
 
         // --- Initial Load ---
         window.onload = () => {
-            document.getElementById('current-year').textContent = new Date().getFullYear();
+            document.getElementById('current-year-footer').textContent = new Date().getFullYear();
             showSection('home'); // Show home section by default
             renderPoetsGrid(poetsData); // Populate the poets grid initially
         };
