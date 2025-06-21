@@ -3,196 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موسوعة الشعر العراقي</title>
+    <title>ديوان الشعر العراقي</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for social icons -->
+    <!-- Font Awesome for Hamburger Icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Define custom colors based on the provided image */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap'); /* A classic Arabic font */
+        /* Define custom colors and font based on the suggestions and image */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap'); /* A clear, bold Arabic font */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap'); /* Secondary classic Arabic font */
 
         :root {
-            --bg-dark-blue: #1A1E24; /* Dark background from image */
-            --text-light-gray: #E0E0E0; /* Light text for dark background */
-            --accent-orange: #F57C00; /* Orange accent from image */
-            --bg-off-white: #F8F8F8; /* Off-white for search bar and hero section */
-            --text-dark-gray: #333333; /* Dark gray for text on light backgrounds */
+            --dark-bg: #222831; /* Dark background from image analysis */
+            --light-bg: #FAF8F4; /* Suggested warm beige for contrasts */
+            --text-dark: #EEEEEE; /* Light text on dark background */
+            --text-accent: #FFD369; /* Golden yellow accent */
+            --button-primary: #00ADB5; /* Turquoise blue for main buttons */
+            --button-hover: #5eead4; /* Lighter turquoise for hover */
         }
 
         body {
-            font-family: 'Amiri', 'Inter', sans-serif; /* Prioritize Arabic font */
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light-gray);
+            font-family: 'Cairo', 'Amiri', sans-serif; /* Prioritize Cairo for boldness */
+            background-color: var(--dark-bg); /* Apply dark background to entire body */
+            color: var(--text-dark);
             line-height: 1.8; /* Improve readability for Arabic text */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            scroll-behavior: smooth; /* Smooth scrolling for animations */
         }
 
-        /* Custom scrollbar for better aesthetics */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-dark-blue);
+            background: var(--dark-bg);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--accent-orange);
+            background: var(--button-primary);
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-orange);
+            background: var(--text-accent);
         }
 
-        /* Hero section specific styles */
-        .hero-section {
-            background-color: var(--bg-off-white);
-            color: var(--text-dark-gray);
-            padding: 80px 0;
-            text-align: center;
-            border-bottom-left-radius: 50px; /* Rounded bottom-left corner */
-            border-bottom-right-radius: 50px; /* Rounded bottom-right corner */
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            position: relative; /* For the background image effect */
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
+        /* --- Header Styles --- */
+        .fixed-header {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
+            z-index: 50;
+            background-color: var(--dark-bg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* --- Hamburger Menu Styles --- */
+        .sidebar {
             height: 100%;
-            background-image: url('https://placehold.co/1920x400/36454F/666666?text=Background'); /* Placeholder for a subtle background image */
-            background-size: cover;
-            background-position: center;
-            opacity: 0.05; /* Very subtle */
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: 3.5rem; /* Larger font size */
-            font-weight: 700;
-            color: var(--text-dark-gray);
-            margin-bottom: 20px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--text-dark-gray);
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-button {
-            background-color: var(--accent-orange);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(245, 124, 0, 0.4);
-        }
-
-        .hero-button:hover {
-            background-color: #E66F00;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(245, 124, 0, 0.6);
-        }
-
-        /* Search input specific styles */
-        .search-input-container {
-            position: relative;
-            background-color: var(--bg-off-white);
-            border-radius: 50px;
-            padding: 8px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 0 auto 40px; /* Center and add margin to bottom */
+            width: 0; /* Hidden by default */
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            right: 0; /* From right for RTL */
+            background-color: var(--dark-bg);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
             display: flex;
+            flex-direction: column;
             align-items: center;
         }
 
-        .search-input {
-            width: calc(100% - 40px); /* Adjust for icon padding */
-            padding: 10px 15px;
-            border: none;
-            background: none;
-            outline: none;
-            font-size: 1.1rem;
-            color: var(--text-dark-gray);
-        }
-
-        .search-icon {
-            color: #999;
-            font-size: 1.2rem;
-        }
-
-        /* Poet card specific styles */
-        .poet-card {
-            background-color: var(--bg-dark-blue);
-            border-radius: 15px;
-            padding: 30px 20px;
+        .sidebar a {
+            padding: 15px 8px 15px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: var(--text-dark);
+            display: block;
+            transition: 0.3s;
+            width: 100%;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent; /* Default border */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .poet-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            border-color: var(--accent-orange); /* Orange border on hover */
+        .sidebar a:hover {
+            color: var(--text-accent);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .poet-name-display {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-light-gray);
-            transition: color 0.3s ease;
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px; /* Adjust for RTL */
+            font-size: 36px;
+            margin-left: 50px;
         }
 
-        .poet-card:hover .poet-name-display {
-            color: var(--accent-orange); /* Orange text on hover */
-        }
-
-        /* Animations for interactive feel */
-        .fade-in {
+        /* --- Poet Card Animations --- */
+        .poet-card-hidden {
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
+            transform: translateX(-50px); /* Appear from left */
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .poet-card-visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        .slide-up {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.8s ease-out forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Modal styles */
+        /* --- Modal Styles --- */
         .modal {
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
@@ -202,251 +130,133 @@
             width: 100%; /* Full width */
             height: 100%; /* Full height */
             overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Darker overlay */
+            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
         .modal-content {
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light-gray);
+            background-color: var(--light-bg);
             margin: auto;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.6);
-            max-width: 900px;
-            width: 95%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 90%;
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
             text-align: center;
             direction: rtl;
-            border: 3px solid var(--accent-orange); /* Bold orange border for modal */
         }
 
         .close-button {
-            color: var(--text-light-gray);
-            font-size: 40px; /* Larger close button */
+            color: var(--dark-bg);
+            font-size: 36px;
             font-weight: bold;
             position: absolute;
-            top: 15px;
-            right: 25px;
+            top: 10px;
+            left: 20px; /* Adjust for RTL */
             cursor: pointer;
             transition: color 0.3s ease;
         }
 
         .close-button:hover,
         .close-button:focus {
-            color: var(--accent-orange);
+            color: var(--button-primary);
             text-decoration: none;
             cursor: pointer;
         }
 
         .poem-title-modal {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: var(--accent-orange);
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--text-light-gray);
+            color: var(--button-primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--text-accent);
+            padding-bottom: 10px;
         }
 
         .poem-text-modal {
-            font-size: 1.3rem;
+            font-family: 'Amiri', serif; /* Use a classic font for poem text */
+            font-size: 1.2rem;
             white-space: pre-line;
             text-align: justify;
             margin-top: 20px;
-            line-height: 2.2; /* More line height for poem readability */
-            color: var(--text-light-gray);
+            color: var(--dark-bg); /* Dark text on light modal background */
         }
 
-        /* Loader styles */
+        @media (max-width: 768px) {
+            .poem-text-modal {
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading indicator styles */
         .loader {
-            border: 6px solid #444; /* Dark grey */
-            border-top: 6px solid var(--accent-orange); /* Orange */
+            border: 6px solid #f3f3f3; /* Light grey */
+            border-top: 6px solid var(--button-primary); /* Blue */
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            display: none;
+            display: none; /* Hidden by default */
         }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Footer styles */
-        footer {
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light-gray);
-            padding: 40px 0;
-            text-align: center;
-            border-top: 2px solid var(--accent-orange); /* Orange border at top of footer */
-        }
-
-        .footer-social-icons a {
-            color: var(--text-light-gray);
-            font-size: 2rem;
-            margin: 0 15px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-social-icons a:hover {
-            color: var(--accent-orange);
-        }
-
-        .footer-links a {
-            color: var(--text-light-gray);
-            margin: 0 10px;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-orange);
-        }
-        /* Make important buttons more visible */
-        #back-to-poets {
-            background-color: var(--accent-orange); /* Orange background */
-            color: white; /* White text */
-            font-weight: bold;
-            padding: 12px 25px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(245, 124, 0, 0.4);
-            font-size: 1.1rem;
-        }
-
-        #back-to-poets:hover {
-            background-color: #E66F00;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(245, 124, 0, 0.6);
-        }
-
-        /* Poet detail page heading */
-        .poet-detail-heading {
-            color: var(--accent-orange); /* Orange for heading */
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 3rem;
-            font-weight: 700;
-        }
-        /* Styles for the poet's bio section */
-        .poet-bio-card {
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light-gray);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            border: 2px solid var(--accent-orange); /* Orange border */
-            text-align: justify;
-        }
-
-        .poet-bio-card h2 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--accent-orange);
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .poet-bio-card p {
-            font-size: 1.2rem;
-            line-height: 2;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Poem list item styles */
-        .poem-list-item {
-            background-color: var(--bg-dark-blue);
-            color: var(--text-light-gray);
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-right: 5px solid transparent; /* Initial border */
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .poem-list-item:hover {
-            background-color: #2A2E34; /* Slightly lighter dark blue on hover */
-            transform: translateX(5px); /* Slight slide effect */
-            border-color: var(--accent-orange); /* Orange border on hover */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
-
-        .poem-list-item h4 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-light-gray);
-            transition: color 0.3s ease;
-        }
-
-        .poem-list-item:hover h4 {
-            color: var(--accent-orange); /* Orange text on hover */
-        }
     </style>
 </head>
-<body class="selection:bg-accent-orange/50">
-    <!-- Header/Navigation Bar (Top part of the image) -->
-    <header class="bg-bg-dark-blue py-6 shadow-md">
-        <nav class="container mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
-            <div class="text-3xl font-bold text-text-light-gray mb-4 sm:mb-0">
-                موسوعة الشعر العراقي
-            </div>
-            <ul class="flex flex-wrap justify-center gap-4 text-lg font-medium">
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">الرئيسية</a></li>
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">الشعراء</a></li>
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">شعر الحب والغزل</a></li>
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">شعر الرومانسية</a></li>
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">شعر الجرأة</a></li>
-                <li><a href="#" class="text-text-light-gray hover:text-accent-orange transition-colors">أنواع أخرى</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="selection:bg-text-accent/50">
 
-    <!-- Hero Section (Middle part of the image) -->
-    <section class="hero-section">
-        <div class="hero-bg"></div>
-        <div class="hero-content">
-            <div class="search-input-container">
-                <i class="fas fa-search search-icon ml-3"></i>
-                <input type="text" id="site-search" placeholder="ابحث عن قصائد، شعراء، أو كلمات...."
-                       class="search-input text-right">
-            </div>
+    <!-- Hamburger Menu Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" onclick="showPoetsPage()">الرئيسية</a>
+        <a href="#" onclick="showPoetsPage()">الشعراء</a>
+        <a href="#" onclick="showCategory('love')">شعر الحب</a>
+        <a href="#" onclick="showCategory('sadness')">شعر الحزن</a>
+        <a href="#" onclick="showCategory('longing')">شعر الاشتياق</a>
+        <a href="#" onclick="showCategory('joy')">شعر الفرح</a>
+        <a href="#" onclick="showCategory('wisdom')">شعر الحكمة</a>
+        <a href="#">أنواع أخرى</a>
+    </div>
 
-            <h1 class="hero-title fade-in" style="animation-delay: 0.2s;">مرحباً بك في <span class="text-accent-orange">موسوعة الشعر</span> العراقي</h1>
-            <p class="hero-subtitle fade-in" style="animation-delay: 0.4s;">بوابة شاملة لأروع القصائد وأبرز الشعراء العراقيين</p>
-            <button id="start-browsing" class="hero-button fade-in" style="animation-delay: 0.6s;">
-                ابدأ التصفح
-            </button>
+    <!-- Fixed Header -->
+    <header id="main-header" class="fixed-header flex justify-between items-center px-4 py-3 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-4">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-text-accent whitespace-nowrap">موسوعة الشعر العراقي</h1>
+            <div class="relative w-full sm:w-64">
+                <input type="text" id="main-search" placeholder="ابحث عن قصائد، شعراء..."
+                       class="p-2 pl-10 border-2 border-button-primary rounded-full focus:outline-none focus:ring-2 focus:ring-text-accent w-full text-lg text-right bg-dark-bg text-text-dark placeholder-gray-400">
+                <i class="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
         </div>
-    </section>
+        <button class="text-text-dark text-3xl sm:text-4xl p-2 rounded-lg hover:bg-gray-700 transition-colors" onclick="openNav()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+    <div class="h-[76px] sm:h-[84px]"></div> <!-- Placeholder for fixed header height -->
 
-    <!-- Main Container -->
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Main Content Container -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+
         <!-- Poets Page (Default view) -->
         <section id="poets-page" class="py-10">
-            <h2 class="text-4xl font-extrabold text-center mb-10 text-accent-orange drop-shadow-lg fade-in" style="animation-delay: 0.8s;">الشعراء البارزون</h2>
-
-            <div class="flex flex-col sm:flex-row items-center justify-center mb-12 gap-4 fade-in" style="animation-delay: 1s;">
-                <input type="text" id="poet-search" placeholder="ابحث عن شاعر..."
-                       class="p-3 border-2 border-accent-orange rounded-full focus:outline-none focus:ring-2 focus:ring-accent-orange w-full sm:w-80 text-lg text-right shadow-md bg-bg-dark-blue text-text-light-gray">
-                <button id="search-button"
-                        class="bg-accent-orange hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    بحث
-                </button>
+            <!-- Welcome Section -->
+            <div class="bg-light-bg rounded-2xl shadow-xl p-6 sm:p-10 mb-12 text-center border-b-4 border-button-primary">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 text-dark-bg leading-tight">مرحباً بك في موسوعة الشعر العراقي</h2>
+                <p class="text-xl sm:text-2xl text-dark-bg leading-relaxed max-w-3xl mx-auto">بوابة شاملة لأروع القصائد وأبرز الشعراء العراقيين</p>
             </div>
 
+            <h3 class="text-3xl font-bold text-center mb-8 text-text-accent">الشعراء البارزون</h3>
             <div id="poets-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Poet cards will be rendered here by JavaScript -->
             </div>
@@ -455,19 +265,24 @@
         <!-- Poet Detail Page (Hidden by default) -->
         <section id="poet-detail-page" class="py-10 hidden">
             <button id="back-to-poets"
-                    class="mb-8 bg-accent-orange hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    class="mb-8 bg-text-accent hover:bg-button-primary text-dark-bg font-bold py-2 px-5 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md">
                 العودة إلى الشعراء
             </button>
 
-            <div class="poet-bio-card">
-                <h2 id="poet-detail-name" class="fade-in"></h2>
-                <p id="poet-detail-bio" class="fade-in" style="animation-delay: 0.2s;"></p>
+            <div class="bg-light-bg rounded-2xl shadow-xl p-8 mb-10 text-center border-b-4 border-button-primary">
+                <img id="poet-detail-image" src="" alt="صورة الشاعر" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover border-4 border-text-accent shadow-lg">
+                <h2 id="poet-detail-name" class="text-4xl font-extrabold mb-4 text-dark-bg"></h2>
+                <p id="poet-detail-bio" class="text-lg leading-relaxed text-dark-bg text-justify max-w-4xl mx-auto"></p>
             </div>
 
-            <h3 class="text-3xl font-bold text-center mb-8 text-accent-orange fade-in" style="animation-delay: 0.4s;">قصائد الشاعر</h3>
-            <div class="flex items-center justify-center mb-8 fade-in" style="animation-delay: 0.6s;">
-                <input type="text" id="poem-search" placeholder="ابحث عن قصيدة..."
-                       class="p-3 border-2 border-accent-orange rounded-full focus:outline-none focus:ring-2 focus:ring-accent-orange w-full sm:w-96 text-lg text-right shadow-md bg-bg-dark-blue text-text-light-gray">
+            <h3 class="text-3xl font-bold text-center mb-8 text-text-accent">قصائد الشاعر</h3>
+            <div id="poem-categories" class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="general">عامة</button>
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="love">حب</button>
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="sadness">حزن</button>
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="longing">اشتياق</button>
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="joy">فرح</button>
+                <button class="category-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-colors duration-200" data-category="wisdom">حكمة</button>
             </div>
 
             <ul id="poems-list" class="space-y-4">
@@ -486,89 +301,270 @@
         </div>
     </div>
 
-    <!-- Footer (Bottom part of the image) -->
-    <footer class="mt-12">
-        <div class="container mx-auto px-4 py-8">
-            <div class="mb-6">
-                <h3 class="text-3xl font-bold mb-4 text-accent-orange">موسوعة الشعر العراقي</h3>
-                <p class="text-lg leading-relaxed max-w-2xl mx-auto">
-                    بوابتك الشاملة لأروع قصائد الشعر الشعبي العراقي من عمالقة الشعر إلى الأصوات الشابة. نسعى لإثراء الساحة الأدبية وتقديم أرشيف متكامل يعكس جمال وعمق الكلمة العراقية.
-                </p>
-            </div>
-
-            <p class="text-md mb-6">&copy; 2025 كرار حيدر. جميع الحقوق محفوظة.</p>
-
-            <div class="footer-social-icons mb-6">
-                <a href="https://www.youtube.com/@U1QO1" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.instagram.com/k9x9i" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.tiktok.com/@c3_i2" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            </div>
-
-            <div class="footer-links text-sm">
-                <a href="#">سياسة الخصوصية</a> |
-                <a href="#">شروط الاستخدام</a> |
-                <a href="#">خريطة الموقع</a>
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="bg-dark-bg py-6 text-center shadow-inner mt-10">
+        <p class="text-text-dark text-sm">&copy; <span id="current-year"></span> كرار حيدر. جميع الحقوق محفوظة.</p>
     </footer>
 
     <script>
-        // Placeholder data for poets and poems
+        // Data for poets and poems
         const poetsData = [
             {
                 id: 'al_mutanabbi',
                 name: 'أبو الطيب المتنبي',
-                bio: 'هو أحمد بن الحسين الجعفي الكندي الكوفي أبو الطيب المتنبي. أحد أعظم شعراء العرب، ولد بالكوفة سنة 303 هـ وتوفي سنة 354 هـ. اشتهر بقوة لغته وفصاحته، وحكمته في شعره الذي تناول المدح والهجاء والرثاء والفخر والحكمة.',
-                poems: [
-                    { title: 'أنا الذي نظر الأعمى إلى أدبي' },
-                    { title: 'على قدر أهل العزم تأتي العزائم' },
-                    { title: 'وإذا كانت النفوس كباراً' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Al_Mutanabbi.jpg/300px-Al_Mutanabbi.jpg',
+                bio: 'هو أحمد بن الحسين الجعفي الكندي الكوفي أبو الطيب المتنبي. أحد أعظم شعراء العرب، ولد بالكوفة سنة 303 هـ وتوفي سنة 354 هـ. اشتهر بقوة لغته وفصاحته، وحكمته في شعره الذي تناول المدح والهجاء والرثاء والفخر والحكمة. يُعتبر شعره قمة الإبداع الأدبي العربي، وقد حفظ منه الكثير وصار مضرب الأمثال.',
+                poems: {
+                    general: [
+                        { title: 'أنا الذي نظر الأعمى إلى أدبي' },
+                        { title: 'على قدر أهل العزم تأتي العزائم' },
+                        { title: 'وإذا كانت النفوس كباراً' }
+                    ],
+                    love: [
+                        { title: 'أحبك لو كان حبي داءً' },
+                        { title: 'فبتّ كأنني أسقى رضاباً' }
+                    ],
+                    sadness: [
+                        { title: 'كفى بك داء أن ترى الموت شافيا' },
+                        { title: 'ما كل ما يتمنى المرء يدركه' }
+                    ],
+                    longing: [
+                        { title: 'إذا ترحلت عن قوم وقد قدروا' },
+                        { title: 'وحشتك يا سماء الشوق روحي' }
+                    ],
+                    joy: [
+                        { title: 'عيد بأي حال عدت يا عيد' },
+                        { title: 'الخيل والليل والبيداء تعرفني' }
+                    ],
+                    wisdom: [
+                        { title: 'ذو العقل يشقى في النعيم بعقله' },
+                        { title: 'إذا أنت أكرمت الكريم ملكته' }
+                    ]
+                }
             },
             {
                 id: 'badr_shaker',
                 name: 'بدر شاكر السياب',
-                bio: 'شاعر عراقي رائد من رواد الشعر الحر، ولد في قرية جيكور بالبصرة عام 1926 وتوفي في الكويت عام 1964. يعتبر من أهم مؤسسي حركة الشعر الحر في الأدب العربي، وأثرى المكتبة العربية بقصائده العميقة التي تتناول الواقع والمعاناة والأساطير.',
-                poems: [
-                    { title: 'أنشودة المطر' },
-                    { title: 'مدينة بلا مطر' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/ar/thumb/8/87/Bader_Shaker_Al-Sayab.jpg/250px-Bader_Shaker_Al-Sayab.jpg',
+                bio: 'شاعر عراقي رائد من رواد الشعر الحر، ولد في قرية جيكور بالبصرة عام 1926 وتوفي في الكويت عام 1964. يعتبر من أهم مؤسسي حركة الشعر الحر في الأدب العربي، وأثرى المكتبة العربية بقصائده العميقة التي تتناول الواقع والمعاناة والأساطير، معالجاً قضايا الوطن والإنسان بلغة شعرية متفردة.',
+                poems: {
+                    general: [
+                        { title: 'أنشودة المطر' },
+                        { title: 'مدينة بلا مطر' }
+                    ],
+                    love: [
+                        { title: 'غريب على الخليج' },
+                        { title: 'كانت لدي وردة' }
+                    ],
+                    sadness: [
+                        { title: 'المومس العمياء' },
+                        { title: 'حفار القبور' }
+                    ],
+                    longing: [
+                        { title: 'رسالة إلى جيكور' },
+                        { title: 'لأني غريب' }
+                    ],
+                    joy: [
+                        { title: 'أزهار و أساطير' },
+                        { title: 'فجر' }
+                    ],
+                    wisdom: [
+                        { title: 'أقوال من زمن قديم' },
+                        { title: 'الشعر هو الحياة' }
+                    ]
+                }
             },
             {
                 id: 'nazik_al_malaika',
                 name: 'نازك الملائكة',
-                bio: 'شاعرة عراقية وناقدة، ولدت في بغداد عام 1923 وتوفيت في القاهرة عام 2007. تُعد من أهم رواد الشعر الحر في الأدب العربي، إلى جانب بدر شاكر السياب وعبد الوهاب البياتي. تميزت قصائدها بجمال اللغة وعمق المعنى والفلسفة.',
-                poems: [
-                    { title: 'الكوليرا' },
-                    { title: 'عاشقة الليل' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/ar/thumb/9/91/Nzk_Almlayk.jpg/220px-Nzk_Almlayk.jpg',
+                bio: 'شاعرة عراقية وناقدة، ولدت في بغداد عام 1923 وتوفيت في القاهرة عام 2007. تُعد من أهم رواد الشعر الحر في الأدب العربي، إلى جانب بدر شاكر السياب وعبد الوهاب البياتي. تميزت قصائدها بجمال اللغة وعمق المعنى والفلسفة، وتناولت مواضيع الحرية والمرأة والحياة والموت.',
+                poems: {
+                    general: [
+                        { title: 'الكوليرا' },
+                        { title: 'عاشقة الليل' }
+                    ],
+                    love: [
+                        { title: 'أنا والليل' },
+                        { title: 'حبيبي يا ساكن الروح' }
+                    ],
+                    sadness: [
+                        { title: 'شجرة القمر' },
+                        { title: 'قنص المجهول' }
+                    ],
+                    longing: [
+                        { title: 'وحدة' },
+                        { title: 'المساء في القرية' }
+                    ],
+                    joy: [
+                        { title: 'يوميات' },
+                        { title: 'فرحة الألوان' }
+                    ],
+                    wisdom: [
+                        { title: 'في الطريق' },
+                        { title: 'الشعر فن الحياة' }
+                    ]
+                }
             },
             {
                 id: 'abd_al_wahhab',
                 name: 'عبد الوهاب البياتي',
-                bio: 'شاعر عراقي بارز من رواد حركة الشعر الحر، ولد في بغداد عام 1926 وتوفي في دمشق عام 1999. عرف بشعره الغزير والمتنوع الذي يجمع بين الواقعية والرمزية، ويعكس هموم الإنسان العربي وقضاياه الاجتماعية والسياسية.',
-                poems: [
-                    { title: 'سوق القرية' },
-                    { title: 'النار والكلمات' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/ar/thumb/8/87/Abd_al-Wahhab_al-Bayati.jpg/220px-Abd_al-Wahhab_al-Bayati.jpg',
+                bio: 'شاعر عراقي بارز من رواد حركة الشعر الحر، ولد في بغداد عام 1926 وتوفي في دمشق عام 1999. عرف بشعره الغزير والمتنوع الذي يجمع بين الواقعية والرمزية، ويعكس هموم الإنسان العربي وقضاياه الاجتماعية والسياسية، ويُعتبر صوته الشعري معبراً عن جيل بأكمله.',
+                poems: {
+                    general: [
+                        { title: 'سوق القرية' },
+                        { title: 'النار والكلمات' }
+                    ],
+                    love: [
+                        { title: 'عينيها' },
+                        { title: 'ألف ليلة وليلة' }
+                    ],
+                    sadness: [
+                        { title: 'الذي يأتي ولا يأتي' },
+                        { title: 'الموت في بغداد' }
+                    ],
+                    longing: [
+                        { title: 'رحلة في أعماق الذاكرة' },
+                        { title: 'نداء الروح' }
+                    ],
+                    joy: [
+                        { title: 'إلى حبيبته' },
+                        { title: 'فرحة العود' }
+                    ],
+                    wisdom: [
+                        { title: 'كتاب الفقر والثورة' },
+                        { title: 'الحكمة الضائعة' }
+                    ]
+                }
             },
             {
                 id: 'jamil_sidqi',
                 name: 'جميل صدقي الزهاوي',
-                bio: 'شاعر وفيلسوف عراقي، ولد في بغداد عام 1863 وتوفي فيها عام 1936. يعتبر من أبرز شعراء العراق في العصر الحديث، واشتهر بشعره الذي يدعو إلى الإصلاح الاجتماعي والنهضة والحرية، وكان من دعاة تحرير المرأة.',
-                poems: [
-                    { title: 'الخمر' },
-                    { title: 'الزهاوي عن المرأة' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Jamil_Sidqi_al-Zahawi.jpg/220px-Jamil_Sidqi_al-Zahawi.jpg',
+                bio: 'شاعر وفيلسوف عراقي، ولد في بغداد عام 1863 وتوفي فيها عام 1936. يعتبر من أبرز شعراء العراق في العصر الحديث، واشتهر بشعره الذي يدعو إلى الإصلاح الاجتماعي والنهضة والحرية، وكان من دعاة تحرير المرأة. شعره اتسم بالجرأة الفكرية والأسلوب البليغ.',
+                poems: {
+                    general: [
+                        { title: 'الخمر' },
+                        { title: 'الزهاوي عن المرأة' }
+                    ],
+                    love: [
+                        { title: 'غرامي المستحيل' },
+                        { title: 'إلى حبيبتي' }
+                    ],
+                    sadness: [
+                        { title: 'مرثية بغداد' },
+                        { title: 'شكوى الزمن' }
+                    ],
+                    longing: [
+                        { title: 'الشوق إلى الماضي' },
+                        { title: 'أحن إليك' }
+                    ],
+                    joy: [
+                        { title: 'بشائر العيد' },
+                        { title: 'نشوة الحياة' }
+                    ],
+                    wisdom: [
+                        { title: 'درس الحياة' },
+                        { title: 'من أقوال الحكماء' }
+                    ]
+                }
             },
             {
                 id: 'ma_ruf_al_rusafi',
                 name: 'معروف الرصافي',
-                bio: 'شاعر عراقي كبير، ولد في بغداد عام 1875 وتوفي فيها عام 1945. يعد من رواد الشعر الحديث في العراق، وعرف بشعره الوطني والاجتماعي الذي يلامس قضايا الفقر والجهل والظلم، وكان له دور كبير في الصحافة العراقية.',
-                poems: [
-                    { title: 'الأرملة المرضعة' },
-                    { title: 'في دار الأيتام' }
-                ]
+                image: 'https://upload.wikimedia.org/wikipedia/ar/thumb/5/52/Al_Rusafi.jpg/220px-Al_Rusafi.jpg',
+                bio: 'شاعر عراقي كبير، ولد في بغداد عام 1875 وتوفي فيها عام 1945. يعد من رواد الشعر الحديث في العراق، وعرف بشعره الوطني والاجتماعي الذي يلامس قضايا الفقر والجهل والظلم، وكان له دور كبير في الصحافة العراقية، داعياً للعدالة والتعليم ومناهضة الاستبداد.',
+                poems: {
+                    general: [
+                        { title: 'الأرملة المرضعة' },
+                        { title: 'في دار الأيتام' }
+                    ],
+                    love: [
+                        { title: 'أنت الحبيب' },
+                        { title: 'همسة حب' }
+                    ],
+                    sadness: [
+                        { title: 'وداع بغداد' },
+                        { title: 'شكوى فلاح' }
+                    ],
+                    longing: [
+                        { title: 'حنين إلى الوطن' },
+                        { title: 'يا بغداد لا تشجعي' }
+                    ],
+                    joy: [
+                        { title: 'تحية العيد' },
+                        { title: 'بشائر النصر' }
+                    ],
+                    wisdom: [
+                        { title: 'العلم والأخلاق' },
+                        { title: 'الحياة دروس' }
+                    ]
+                }
+            },
+            {
+                id: 'mohammad_mahdi_al_jawahiri',
+                name: 'محمد مهدي الجواهري',
+                image: 'https://upload.wikimedia.org/wikipedia/ar/thumb/a/a2/%D9%85%D8%AD%D9%85%D8%AF_%D9%85%D9%87%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%87%D8%B1%D9%8A.jpg/220px-%D9%85%D8%AD%D9%85%D8%AF_%D9%85%D9%87%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D9%87%D8%B1%D9%8A.jpg',
+                bio: 'شاعر عربي عراقي يُلقب بـ "نهر العراق الثالث" و "شاعر العرب الأكبر". ولد في النجف عام 1899 وتوفي في دمشق عام 1997. يعتبر من أبرز شعراء العصر الحديث، وامتاز بغزارة إنتاجه وقوة أسلوبه وشاعريته الفذة التي غطت مختلف الأغراض الشعرية من وطنية وقومية ووجدانية.',
+                poems: {
+                    general: [
+                        { title: 'يا دجلة الخير' },
+                        { title: 'إلى أمي' }
+                    ],
+                    love: [
+                        { title: 'أتتني ذات يوم' },
+                        { title: 'حديث القلب' }
+                    ],
+                    sadness: [
+                        { title: 'ليلة وداع' },
+                        { title: 'شكوى من الغربة' }
+                    ],
+                    longing: [
+                        { title: 'أيها الوطن' },
+                        { title: 'الشوق إلى بغداد' }
+                    ],
+                    joy: [
+                        { title: 'ذكرى ثورة' },
+                        { title: 'فرحة الأمل' }
+                    ],
+                    wisdom: [
+                        { title: 'كن في الحياة' },
+                        { title: 'فلسفة الحياة' }
+                    ]
+                }
+            },
+            {
+                id: 'abdul_ghani_al_raoui',
+                name: 'عبد الغني الراوي',
+                image: 'https://placehold.co/150x150/00ADB5/ffffff?text=الراوي',
+                bio: 'شاعر عراقي معاصر، يُعرف بأسلوبه المميز الذي يجمع بين الأصالة والمعاصرة. ولد في العراق وله العديد من الدواوين الشعرية التي تتناول مواضيع متنوعة مثل الحب والوطن وقضايا الإنسان المعاصر، ويُعتبر صوته من الأصوات الشعرية الجديدة والمؤثرة في الساحة الأدبية العراقية.',
+                poems: {
+                    general: [
+                        { title: 'بغداد الحبيبة' },
+                        { title: 'نهر الحياة' }
+                    ],
+                    love: [
+                        { title: 'عيناكِ سرُّ وجودي' },
+                        { title: 'قصيدة حب أبدية' }
+                    ],
+                    sadness: [
+                        { title: 'وجع الروح' },
+                        { title: 'دموع الفراق' }
+                    ],
+                    longing: [
+                        { title: 'شوق إلى الأمس' },
+                        { title: 'حنين الوطن' }
+                    ],
+                    joy: [
+                        { title: 'لحظة أمل' },
+                        { title: 'ابتسامة الحياة' }
+                    ],
+                    wisdom: [
+                        { title: 'دروس الأيام' },
+                        { title: 'حكمة الزمن' }
+                    ]
+                }
             }
         ];
 
@@ -576,15 +572,14 @@
         const poetsPage = document.getElementById('poets-page');
         const poetDetailPage = document.getElementById('poet-detail-page');
         const poetsGrid = document.getElementById('poets-grid');
-        const poetSearchInput = document.getElementById('poet-search');
-        const searchButton = document.getElementById('search-button');
-        const startBrowsingButton = document.getElementById('start-browsing');
+        const mainSearchInput = document.getElementById('main-search');
         const backToPoetsButton = document.getElementById('back-to-poets');
 
+        const poetDetailImage = document.getElementById('poet-detail-image');
         const poetDetailName = document.getElementById('poet-detail-name');
         const poetDetailBio = document.getElementById('poet-detail-bio');
         const poemsList = document.getElementById('poems-list');
-        const poemSearchInput = document.getElementById('poem-search');
+        const poemCategoriesContainer = document.getElementById('poem-categories');
 
         const poemModal = document.getElementById('poem-modal');
         const closePoemModalButton = document.getElementById('close-poem-modal');
@@ -592,28 +587,105 @@
         const modalPoemText = document.getElementById('modal-poem-text');
         const modalLoader = document.getElementById('modal-loader');
 
-        let currentPoetId = null; // To keep track of the currently viewed poet
+        const mySidebar = document.getElementById("mySidebar");
+        const mainHeader = document.getElementById("main-header");
+        const currentYearSpan = document.getElementById("current-year");
 
-        // Function to render poet cards with fade-in animation
+        let currentPoetId = null; // To keep track of the currently viewed poet
+        let currentPoemCategory = 'general'; // Default category for poems
+
+        // --- Hamburger Menu Logic ---
+        function openNav() {
+            mySidebar.style.width = "250px"; /* Sidebar width */
+        }
+
+        function closeNav() {
+            mySidebar.style.width = "0";
+        }
+
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop) {
+                // Scrolling down
+                mainHeader.classList.add('header-hidden');
+                closeNav(); // Close sidebar if scrolling down
+            } else {
+                // Scrolling up
+                mainHeader.classList.remove('header-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        });
+
+        // --- Page Navigation Functions ---
+        function showPoetsPage() {
+            poetDetailPage.classList.add('hidden');
+            poetsPage.classList.remove('hidden');
+            mainSearchInput.value = ''; // Clear main search bar
+            renderPoets(poetsData); // Re-render all poets
+            closeNav(); // Close sidebar
+            window.scrollTo(0, 0); // Scroll to top
+        }
+
+        function showCategory(category) {
+            closeNav(); // Close sidebar
+            // This function would ideally filter poets based on some metadata,
+            // or perhaps navigate to a general category page listing poems from all poets in that category.
+            // For this implementation, it will just log the category and return to poets page for simplicity.
+            // In a real app, you'd build a new view for categories.
+            alert(`سيتم عرض قصائد من فئة: ${category === 'love' ? 'الحب' : category === 'sadness' ? 'الحزن' : category === 'longing' ? 'الاشتياق' : category === 'joy' ? 'الفرح' : category === 'wisdom' ? 'الحكمة' : 'عامة'}. هذا قسم قيد الإنشاء!`);
+            showPoetsPage(); // Go back to poets page for now
+        }
+
+        // --- Poet Card Rendering and Animations ---
         function renderPoets(poetsToRender) {
             poetsGrid.innerHTML = ''; // Clear previous poets
             if (poetsToRender.length === 0) {
-                poetsGrid.innerHTML = '<p class="col-span-full text-center text-xl text-red-400 mt-8">لا توجد نتائج مطابقة.</p>';
+                poetsGrid.innerHTML = '<p class="col-span-full text-center text-xl text-text-accent">لا توجد نتائج مطابقة.</p>';
                 return;
             }
             poetsToRender.forEach((poet, index) => {
                 const poetCard = document.createElement('div');
-                poetCard.classList.add('poet-card', 'slide-up');
-                poetCard.style.animationDelay = `${0.1 * index}s`; // Staggered animation
+                poetCard.classList.add('bg-light-bg', 'rounded-2xl', 'shadow-lg', 'p-6', 'text-center', 'transform', 'transition-transform', 'duration-300', 'hover:scale-105', 'hover:shadow-xl', 'border-b-4', 'border-button-primary', 'poet-card-hidden');
+                poetCard.style.transitionDelay = `${index * 0.1}s`; // Staggered animation
                 poetCard.innerHTML = `
-                    <h3 class="poet-name-display">${poet.name}</h3>
+                    <img src="${poet.image}" alt="صورة ${poet.name}" onerror="this.onerror=null;this.src='https://placehold.co/150x150/CCCCCC/666666?text=لا+صورة'"
+                         class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-text-accent shadow-md">
+                    <h3 class="text-2xl font-bold mb-2 text-dark-bg">${poet.name}</h3>
+                    <button data-poet-id="${poet.id}"
+                            class="view-poems-btn bg-button-primary hover:bg-button-hover text-white font-bold py-2 px-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-md">
+                        عرض قصائده
+                    </button>
                 `;
-                poetCard.addEventListener('click', () => displayPoetDetail(poet.id));
                 poetsGrid.appendChild(poetCard);
+            });
+
+            // Add Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('poet-card-hidden');
+                        entry.target.classList.add('poet-card-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of item is visible
+
+            document.querySelectorAll('.poet-card-hidden').forEach(card => {
+                observer.observe(card);
+            });
+
+
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.view-poems-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const poetId = event.target.dataset.poetId;
+                    displayPoetDetail(poetId);
+                });
             });
         }
 
-        // Function to display poet detail page with animations
+        // Function to display poet detail page
         async function displayPoetDetail(poetId) {
             const poet = poetsData.find(p => p.id === poetId);
             if (!poet) {
@@ -623,51 +695,59 @@
 
             currentPoetId = poetId; // Set current poet
 
+            poetDetailImage.src = poet.image;
+            poetDetailImage.alt = `صورة ${poet.name}`;
             poetDetailName.textContent = poet.name;
             poetDetailBio.textContent = poet.bio;
 
-            // Apply fade-in to elements in detail page
-            poetDetailName.classList.add('fade-in');
-            poetDetailBio.classList.add('fade-in');
-            document.querySelector('#poet-detail-page h3').classList.add('fade-in');
-            document.querySelector('#poet-detail-page .flex.items-center').classList.add('fade-in');
+            // Render poems for the default category (general)
+            renderPoemsForPoet(poet.poems[currentPoemCategory] || []);
 
-            renderPoemsForPoet(poet.poems);
+            // Highlight the default category button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.dataset.category === currentPoemCategory) {
+                    btn.classList.add('bg-text-accent', 'text-dark-bg');
+                    btn.classList.remove('bg-button-primary', 'text-white');
+                } else {
+                    btn.classList.remove('bg-text-accent', 'text-dark-bg');
+                    btn.classList.add('bg-button-primary', 'text-white');
+                }
+            });
+
 
             poetsPage.classList.add('hidden');
             poetDetailPage.classList.remove('hidden');
             window.scrollTo(0, 0); // Scroll to top of the page
         }
 
-        // Function to render poems for the current poet with slide-up animation
+        // Function to render poems for the current poet based on category
         function renderPoemsForPoet(poemsToRender) {
             poemsList.innerHTML = ''; // Clear previous poems
             if (poemsToRender.length === 0) {
-                poemsList.innerHTML = '<p class="text-center text-lg text-text-light-gray mt-8">لا توجد قصائد لهذا الشاعر حتى الآن.</p>';
+                poemsList.innerHTML = '<p class="text-center text-lg text-text-accent">لا توجد قصائد في هذه الفئة لهذا الشاعر حتى الآن.</p>';
                 return;
             }
-            poemsToRender.forEach((poem, index) => {
+            poemsToRender.forEach(poem => {
                 const listItem = document.createElement('li');
-                listItem.classList.add('poem-list-item', 'slide-up');
-                listItem.style.animationDelay = `${0.1 * index}s`; // Staggered animation
+                listItem.classList.add('bg-light-bg', 'rounded-xl', 'shadow-md', 'p-5', 'cursor-pointer', 'hover:bg-gray-100', 'transition-colors', 'duration-200', 'border-l-4', 'border-text-accent');
                 listItem.innerHTML = `
-                    <h4 class="text-xl font-semibold">${poem.title}</h4>
+                    <h4 class="text-xl font-semibold text-dark-bg">${poem.title}</h4>
                 `;
                 listItem.addEventListener('click', () => showPoemModal(poem));
                 poemsList.appendChild(listItem);
             });
         }
 
-        // Function to show the poem modal and fetch poem content
+        // Function to show the poem modal
         async function showPoemModal(poem) {
             modalPoemTitle.textContent = poem.title;
             modalPoemText.textContent = ''; // Clear previous text
             modalLoader.style.display = 'block'; // Show loader
             poemModal.style.display = 'flex'; // Show modal
 
-            // Construct prompt for LLM
-            const poetName = poetsData.find(p => p.id === currentPoetId)?.name || "شاعر";
-            const prompt = `اكتب القصيدة كاملة بعنوان "${poem.title}" للشاعر ${poetName}. إذا لم تكن القصيدة معروفة أو متوفرة، قم بتوليد قصيدة أصلية وملهمة بهذا العنوان وبأسلوب الشاعر المعروف بـ "${poetName}". اجعل القصيدة تحتوي على معاني عميقة وجمالية، ومناسبة لطبيعة الشعر العراقي.`;
+            const poetName = poetDetailName.textContent;
+            // Construct the prompt for the LLM
+            const prompt = `اكتب قصيدة بعنوان "${poem.title}" للشاعر ${poetName}. هذه القصيدة تنتمي إلى فئة "${currentPoemCategory === 'general' ? 'عامة' : currentPoemCategory}". إذا لم تكن القصيدة معروفة، فابتكر قصيدة ملهمة بهذا العنوان والأسلوب والجو العام الذي يتناسب مع الشاعر والفئة المحددة.`;
 
             let chatHistory = [];
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
@@ -688,7 +768,7 @@
                     const generatedText = result.candidates[0].content.parts[0].text;
                     modalPoemText.textContent = generatedText;
                 } else {
-                    modalPoemText.textContent = 'تعذر تحميل القصيدة. قد لا تكون متوفرة أو حدث خطأ في التوليد.';
+                    modalPoemText.textContent = 'تعذر تحميل القصيدة. يرجى المحاولة مرة أخرى.';
                     console.error('API response error:', result);
                 }
             } catch (error) {
@@ -704,12 +784,14 @@
             poemModal.style.display = 'none';
         }
 
-        // Event Listeners
+        // --- Event Listeners ---
         window.onload = () => {
             renderPoets(poetsData); // Render all poets on load
+            currentYearSpan.textContent = new Date().getFullYear(); // Set current year in footer
         };
 
-        poetSearchInput.addEventListener('input', (event) => {
+        // Main search input event
+        mainSearchInput.addEventListener('input', (event) => {
             const searchTerm = event.target.value.toLowerCase();
             const filteredPoets = poetsData.filter(poet =>
                 poet.name.toLowerCase().includes(searchTerm)
@@ -717,39 +799,7 @@
             renderPoets(filteredPoets);
         });
 
-        searchButton.addEventListener('click', () => {
-            const searchTerm = poetSearchInput.value.toLowerCase();
-            const filteredPoets = poetsData.filter(poet =>
-                poet.name.toLowerCase().includes(searchTerm)
-            );
-            renderPoets(filteredPoets);
-        });
-
-        // Event listener for the "ابدأ التصفح" button
-        startBrowsingButton.addEventListener('click', () => {
-            poetsPage.scrollIntoView({ behavior: 'smooth' }); // Smooth scroll to poets section
-        });
-
-
-        poemSearchInput.addEventListener('input', (event) => {
-            const searchTerm = event.target.value.toLowerCase();
-            const currentPoet = poetsData.find(p => p.id === currentPoetId);
-            if (currentPoet) {
-                const filteredPoems = currentPoet.poems.filter(poem =>
-                    poem.title.toLowerCase().includes(searchTerm)
-                );
-                renderPoemsForPoet(filteredPoems);
-            }
-        });
-
-        backToPoetsButton.addEventListener('click', () => {
-            poetDetailPage.classList.add('hidden');
-            poetsPage.classList.remove('hidden');
-            poetSearchInput.value = ''; // Clear search bar
-            renderPoets(poetsData); // Re-render all poets
-            poemSearchInput.value = ''; // Clear poem search bar
-            window.scrollTo(0, 0); // Scroll to top of the page
-        });
+        backToPoetsButton.addEventListener('click', showPoetsPage);
 
         closePoemModalButton.addEventListener('click', hidePoemModal);
 
@@ -765,6 +815,27 @@
             if (event.key === 'Escape' && poemModal.style.display === 'flex') {
                 hidePoemModal();
             }
+        });
+
+        // Poem category buttons event listeners
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('bg-text-accent', 'text-dark-bg');
+                    btn.classList.add('bg-button-primary', 'text-white');
+                });
+
+                // Add active class to clicked button
+                event.target.classList.add('bg-text-accent', 'text-dark-bg');
+                event.target.classList.remove('bg-button-primary', 'text-white');
+
+                currentPoemCategory = event.target.dataset.category;
+                const currentPoet = poetsData.find(p => p.id === currentPoetId);
+                if (currentPoet) {
+                    renderPoemsForPoet(currentPoet.poems[currentPoemCategory] || []);
+                }
+            });
         });
     </script>
 </body>
