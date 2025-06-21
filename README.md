@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موسوعة الشعر الشعبي العراقي</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Tajawal for Arabic support -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for social media icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-R4R/Y8A+Kz/q3F+G9+Y8zF1+W+g7/Q/n6Gz+g/Y7+W8/W9+N7/X6+T7/G6+Z9+F8/V7/T6/F5/R4/V3/T2/G1/Z0/A9/B8/C7/D6/E5/F4/I3/J2/K1/L0/M9/N8/O7/P6/Q5/R4/S3/T2/U1/V0/W9/X8/Y7/Z6/a5/b4/c3/d2/e1/f0/g9/h8/i7/j6/k5/l4/m3/n2/o1/p0/q9/r8/s7/t6/u5/v4/w3/x2/y1/z0/A9/B8/C7/D6/E5/F4/G3/H2/I1/J0/K9/L8/M7/N6/O5/P4/Q3/R2/S1/T0/U9/V8/W7/X6/Y5/Z4/a3/b2/c1/d0/e9/f8/g7/h6/i5/j4/k3/l2/m1/n0/o9/p8/q7/r6/s5/t4/u3/v2/w3/x2/y1/z0" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-R4R/Y8A+Kz/q3F+G9+Y8zF1+W+g7/Q/n6Gz+g/Y7+W8/W9+N7/X6+T7/G6+Z9+F8/V7/T6/F5/R4/V3/T2/G1/Z0/A9/B8/C7/D6/E5/F4/I3/J2/K1/L0/M9/N8/O7/P6/Q5/R4/S3/T2/U1/V0/W9/X8/Y7/Z6/a5/b4/c3/d2/e1/f0/g9/h8/i7/j6/k5/l4/m3/n2/o1/p0/q9/r8/s7/t6/u5/v4/w3/x2/y1/z0/A9/B8/C7/D6/E5/F4/G3/H2/I1/J0/K9/L8/M7/N6/O5/P4/Q3/R2/S1/T0/U9/V8/W7/X6/Y5/Z4/a3/b2/c1/d0/e9/f8/g7/h6/i5/j4/k3/l2/m1/n0/o9/p8/q7/r6/s5/t4/u3/v2/w3/x2/y1/z0" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Global Styles */
         body {
@@ -114,10 +111,10 @@
         }
 
         /* Card hover effect for poems/poets */
-        .poetry-card, .poet-entry {
+        .poetry-card, .poet-entry, .genre-entry {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
-        .poetry-card:hover, .poet-entry:hover {
+        .poetry-card:hover, .poet-entry:hover, .genre-entry:hover {
             transform: translateY(-5px); /* Slight lift */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
         }
@@ -130,21 +127,71 @@
             margin-bottom: 1rem;
         }
 
-        /* Poet entry styling (removed box) */
-        .poet-entry {
+        /* Poet entry styling (card with name) */
+        .poet-entry, .genre-entry {
             background-color: #FFF;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            border-radius: 0.75rem; /* Slightly more rounded */
+            padding: 1.5rem; /* More padding */
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Lighter shadow for a "flatter" look */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06); /* Softer shadow */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Ensure consistent height in grid */
+            cursor: pointer; /* Indicate clickable */
+            border: 2px solid transparent; /* Default transparent border */
         }
-        .poet-entry img {
-            border-radius: 9999px; /* Make image circular */
-            width: 120px; /* Fixed size for consistency */
-            height: 120px;
-            object-fit: cover;
-            margin: 0 auto 0.75rem auto; /* Center and add margin */
-            border: 3px solid #FFA500; /* Orange border for highlight */
+        .poet-entry:hover, .genre-entry:hover {
+            border-color: #FFA500; /* Orange border on hover */
+        }
+
+        .poet-entry h3, .genre-entry h3 {
+            font-size: 1.5rem; /* Larger font for names */
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0; /* No margin at bottom */
+        }
+
+        /* Hidden Section for SPA approach */
+        .hidden-section {
+            display: none !important;
+        }
+
+        /* Back Button Style */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #8B5E3C; /* Darker brown */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .back-button:hover {
+            background-color: #6A4B2E; /* Even darker brown */
+            transform: translateY(-2px);
+        }
+
+        /* Copy Button Style */
+        .copy-button {
+            background-color: #FFA500; /* Orange */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .copy-button:hover {
+            background-color: #EEDC82; /* Muted yellow */
+            transform: translateY(-1px);
+        }
+        .copy-button.copied {
+            background-color: #4CAF50; /* Green when copied */
+            cursor: default;
         }
 
         /* Responsive adjustments for mobile and tablet */
@@ -174,30 +221,32 @@
                 padding: 0.75rem; /* Smaller search input padding */
                 font-size: 1rem; /* Smaller search input text */
             }
-            #hero h1 {
-                font-size: 3rem; /* Smaller hero title on mobile */
+            #main-content h1 {
+                font-size: 2.5rem; /* Smaller hero title on mobile */
             }
-            #hero p {
+            #main-content p {
                 font-size: 1.25rem; /* Smaller hero subtitle on mobile */
             }
-            .btn-primary {
-                font-size: 1.1rem; /* Smaller button text on mobile */
-                padding: 0.75rem 2rem; /* Smaller button padding */
+            .poet-entry, .genre-entry {
+                padding: 1rem;
+            }
+            .poet-entry h3, .genre-entry h3 {
+                font-size: 1.25rem;
             }
             .poetry-card .p-6 {
                 padding: 1rem; /* Smaller card padding on mobile */
             }
-            .poetry-card h3 {
-                font-size: 1.5rem; /* Smaller card title on mobile */
+            .poetry-card h4 {
+                font-size: 1.25rem; /* Smaller card title on mobile */
             }
             .text-5xl { /* Section titles */
-                font-size: 2.5rem;
-            }
-            .text-4xl { /* Newsletter title */
                 font-size: 2rem;
             }
+            .text-4xl { /* Newsletter title */
+                font-size: 1.75rem;
+            }
             .text-xl { /* Newsletter subtitle */
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
             .footer-links {
                 flex-direction: column;
@@ -206,9 +255,13 @@
             .poem-text {
                 font-size: 0.9rem; /* Slightly smaller poem text on mobile */
             }
-            .poet-entry img {
-                width: 90px;
-                height: 90px;
+            .back-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            .copy-button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
 
@@ -217,50 +270,44 @@
             .header-frame {
                 padding: 1.5rem 3rem;
             }
-            #hero h1 {
-                font-size: 4.5rem;
-            }
-            #hero p {
-                font-size: 2rem;
-            }
-            .poetry-card h3 {
-                font-size: 1.75rem;
-            }
-            .text-5xl {
+            #main-content h1 {
                 font-size: 3.5rem;
             }
+            #main-content p {
+                font-size: 1.75rem;
+            }
+            .poetry-card h4 {
+                font-size: 1.5rem;
+            }
+            .text-5xl {
+                font-size: 3rem;
+            }
             .text-4xl {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             .text-xl {
-                font-size: 1.15rem;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
     <header id="main-header" class="fixed top-4 left-1/2 -translate-x-1/2 w-full z-50 transition-all duration-300 ease-in-out header-visible">
         <div class="header-frame">
             <nav class="flex flex-col items-center">
-                <!-- Logo and Navigation Links Row -->
                 <div class="flex flex-col md:flex-row justify-between items-center w-full mb-4 md:mb-0">
-                    <!-- Logo -->
                     <div>
-                        <a href="#" class="text-3xl font-bold text-gray-800 hover:text-orange-500 transition duration-300">
+                        <a href="#" id="home-link" class="text-3xl font-bold text-gray-800 hover:text-orange-500 transition duration-300">
                             موسوعة الشعر الشعبي العراقي
                         </a>
                     </div>
-                    <!-- Navigation Bar -->
                     <ul class="flex flex-wrap justify-center space-x-4 space-x-reverse md:space-x-6 md:space-x-reverse mt-4 md:mt-0">
-                        <li><a href="#hero" class="nav-link text-lg font-medium">الرئيسية</a></li>
-                        <li><a href="#poets-directory" class="nav-link text-lg font-medium">الشعراء</a></li>
-                        <li><a href="#poetry-genres" class="nav-link text-lg font-medium">أنواع الشعر</a></li>
-                        <li><a href="#contact-us" class="nav-link text-lg font-medium">تواصل معنا</a></li>
+                        <li><a href="#" id="nav-poets" class="nav-link text-lg font-medium">الشعراء</a></li>
+                        <li><a href="#" id="nav-genres" class="nav-link text-lg font-medium">أنواع الشعر</a></li>
+                        <li><a href="#footer-copyright" class="nav-link text-lg font-medium">حقوق الطبع والنشر</a></li>
                     </ul>
                 </div>
-                <!-- Search Bar -->
                 <div class="relative w-full mt-4">
                     <input type="text" id="searchInput" placeholder="ابحث عن شاعر أو قصيدة..." class="search-input w-full p-3 md:p-4 text-lg border border-gray-300 rounded-full focus:ring-0 text-right pr-12">
                     <button class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-orange-500 transition duration-300 text-xl" aria-label="بحث">
@@ -271,572 +318,105 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="relative bg-cover bg-center text-center flex flex-col items-center justify-center" style="background-color: #F4F1EE;">
-        <div class="max-w-4xl px-4 py-20">
-            <h1 class="text-6xl md:text-7xl font-extrabold text-gray-800 mb-6 leading-tight animate-fade-in">
+    <main id="main-content" class="container mx-auto py-16 px-6 md:px-12 mt-32">
+        <section id="home-section" class="flex flex-col items-center justify-center text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-6 leading-tight animate-fade-in">
                 مرحبًا بك في <span class="text-orange-500">موسوعة الشعر الشعبي العراقي</span>
             </h1>
-            <p class="text-2xl md:text-3xl text-gray-600 mb-10 animate-fade-in animation-delay-200">
-                بوابة لأروع القصائد وأشهر الشعراء الذين خطوا تاريخ العراق بكلماتهم
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 animate-fade-in animation-delay-200">
+                بوابة لأروع القصائد وأشهر الشعراء الذين خطوا تاريخ العراق بكلماتهم.
             </p>
-            <a href="#poets-directory" class="btn-primary bg-orange-500 text-white text-xl md:text-2xl font-semibold py-4 px-10 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 animate-fade-in animation-delay-400">
-                ابدأ رحلتك الشعرية
-            </a>
-        </div>
-    </section>
 
-    <!-- Poets Directory Section -->
-    <section id="poets-directory" class="container mx-auto py-16 px-6 md:px-12">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">الشعراء العراقيون</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            <!-- Poet Link 1: سمير صبيح -->
-            <a href="#samir-sbeih-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl">
-                <img src="https://placehold.co/120x120/8B5E3C/FAF9F6?text=سمير+صبيح" alt="صورة الشاعر سمير صبيح" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">سمير صبيح</p>
-            </a>
-            <!-- Poet Link 2: جبار رشيد -->
-            <a href="#jabbar-rasheed-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-100">
-                <img src="https://placehold.co/120x120/EEDC82/8B5E3C?text=جبار+رشيد" alt="صورة الشاعر جبار رشيد" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">جبار رشيد</p>
-            </a>
-            <!-- Poet Link 3: علي رشم -->
-            <a href="#ali-rasham-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-200">
-                <img src="https://placehold.co/120x120/FFA500/FAF9F6?text=علي+رشم" alt="صورة الشاعر علي رشم" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">علي رشم</p>
-            </a>
-            <!-- Poet Link 4: مظفر النواب -->
-            <a href="#muzaffar-alnawab-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-300">
-                <img src="https://placehold.co/120x120/F4F1EE/8B5E3C?text=مظفر+النواب" alt="صورة الشاعر مظفر النواب" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">مظفر النواب</p>
-            </a>
-            <!-- Poet Link 5: كاظم اسماعيل الكاطع -->
-            <a href="#kadhim-alkatea-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-400">
-                <img src="https://placehold.co/120x120/8B5E3C/EEDC82?text=كاظم+الكاطع" alt="صورة الشاعر كاظم اسماعيل الكاطع" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">كاظم اسماعيل الكاطع</p>
-            </a>
-            <!-- Poet Link 6: عريان السيد خلف -->
-            <a href="#arian-alsayed-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-500">
-                <img src="https://placehold.co/120x120/FFA500/8B5E3C?text=عريان+السيد+خلف" alt="صورة الشاعر عريان السيد خلف" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">عريان السيد خلف</p>
-            </a>
-            <!-- Poet Link 7: ناظم الحاشي -->
-            <a href="#nazem-alhashi-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-600">
-                <img src="https://placehold.co/120x120/EEDC82/8B5E3C?text=ناظم+الحاشي" alt="صورة الشاعر ناظم الحاشي" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">ناظم الحاشي</p>
-            </a>
-            <!-- Poet Link 8: رحيم المالكي -->
-            <a href="#raheem-almaliki-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-700">
-                <img src="https://placehold.co/120x120/F4F1EE/8B5E3C?text=رحيم+المالكي" alt="صورة الشاعر رحيم المالكي" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">رحيم المالكي</p>
-            </a>
-            <!-- Poet Link 9: عبد الحسين الحلفي -->
-            <a href="#abd-alhussein-alhalfy-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-800">
-                <img src="https://placehold.co/120x120/8B5E3C/FAF9F6?text=عبد+الحسين+الحلفي" alt="صورة الشاعر عبد الحسين الحلفي" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">عبد الحسين الحلفي</p>
-            </a>
-            <!-- Poet Link 10: كريم العراقي -->
-            <a href="#kareem-aliraqi-poems" class="poet-entry flex flex-col items-center justify-center p-4 rounded-lg hover:bg-orange-50 transition duration-300 fade-in-slide-rtl animation-delay-900">
-                <img src="https://placehold.co/120x120/FFA500/8B5E3C?text=كريم+العراقي" alt="صورة الشاعر كريم العراقي" class="w-full h-56 object-cover rounded-t-lg" loading="lazy">
-                <p class="text-lg font-semibold text-gray-800 mt-2">كريم العراقي</p>
-            </a>
-        </div>
-    </section>
+            <section id="poets-directory" class="w-full">
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-10">الشعراء العراقيون</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <a href="#" data-poet-id="muzaffar-alnawab" class="poet-entry">
+                        <h3 class="text-gray-800">مظفر النواب</h3>
+                    </a>
+                    <a href="#" data-poet-id="arian-alsayed" class="poet-entry">
+                        <h3 class="text-gray-800">عريان السيد خلف</h3>
+                    </a>
+                    <a href="#" data-poet-id="kadhim-alkatea" class="poet-entry">
+                        <h3 class="text-gray-800">كاظم اسماعيل الكاطع</h3>
+                    </a>
+                    <a href="#" data-poet-id="samir-sbeih" class="poet-entry">
+                        <h3 class="text-gray-800">سمير صبيح</h3>
+                    </a>
+                    <a href="#" data-poet-id="jabbar-rasheed" class="poet-entry">
+                        <h3 class="text-gray-800">جبار رشيد</h3>
+                    </a>
+                    <a href="#" data-poet-id="ali-rasham" class="poet-entry">
+                        <h3 class="text-gray-800">علي رشم</h3>
+                    </a>
+                    <a href="#" data-poet-id="nazem-alhashi" class="poet-entry">
+                        <h3 class="text-gray-800">ناظم الحاشي</h3>
+                    </a>
+                    <a href="#" data-poet-id="raheem-almaliki" class="poet-entry">
+                        <h3 class="text-gray-800">رحيم المالكي</h3>
+                    </a>
+                    <a href="#" data-poet-id="abd-alhussein-alhalfy" class="poet-entry">
+                        <h3 class="text-gray-800">عبد الحسين الحلفي</h3>
+                    </a>
+                    <a href="#" data-poet-id="ahmed-matar" class="poet-entry">
+                        <h3 class="text-gray-800">أحمد مطر</h3>
+                    </a>
+                    <a href="#" data-poet-id="saheb-aldawiri" class="poet-entry">
+                        <h3 class="text-gray-800">صاحب الضويري</h3>
+                    </a>
+                     <a href="#" data-poet-id="ehab-almaliki" class="poet-entry">
+                        <h3 class="text-gray-800">إيهاب المالكي</h3>
+                    </a>
+                    <a href="#" data-poet-id="mohammad-alghabban" class="poet-entry">
+                        <h3 class="text-gray-800">محمد الغبّان</h3>
+                    </a>
+                </div>
+            </section>
 
-    <!-- Poetry Genres Section -->
-    <section id="poetry-genres" class="container mx-auto py-16 px-6 md:px-12">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">أقسام الشعر الشعبي</h2>
+            <section id="poetry-genres" class="w-full mt-16">
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-10">أقسام الشعر الشعبي</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="#" data-genre-id="love-romantic" class="genre-entry">
+                        <h3 class="text-gray-800">شعر الحب والغزل والرومانسية</h3>
+                    </a>
+                    <a href="#" data-genre-id="bold-patriotic" class="genre-entry">
+                        <h3 class="text-gray-800">شعر جريء ووطني</h3>
+                    </a>
+                    <a href="#" data-genre-id="social-wisdom" class="genre-entry">
+                        <h3 class="text-gray-800">شعر اجتماعي وحكمة</h3>
+                    </a>
+                    <a href="#" data-genre-id="sad-melancholy" class="genre-entry">
+                        <h3 class="text-gray-800">شعر حزين وشجن</h3>
+                    </a>
+                    <a href="#" data-genre-id="humorous-critical" class="genre-entry">
+                        <h3 class="text-gray-800">شعر فكاهي ونقدي</h3>
+                    </a>
+                </div>
+            </section>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Genre Card 1: شعر حب وغزل ورومانسي -->
-            <a href="#love-romantic-poetry-list" class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl text-center p-6 flex flex-col items-center justify-center hover:bg-orange-50 transition duration-300">
-                <img src="https://placehold.co/200x150/FFA500/FAF9F6?text=حب+وغزل" alt="شعر حب وغزل" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
-                <h3 class="text-2xl font-semibold text-gray-800">شعر الحب والغزل والرومانسية</h3>
-            </a>
-            <!-- Genre Card 2: شعر جريء ووطني -->
-            <a href="#bold-patriotic-poetry-list" class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100 text-center p-6 flex flex-col items-center justify-center hover:bg-orange-50 transition duration-300">
-                <img src="https://placehold.co/200x150/8B5E3C/EEDC82?text=جريء+ووطني" alt="شعر جريء ووطني" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
-                <h3 class="text-2xl font-semibold text-gray-800">شعر جريء ووطني</h3>
-            </a>
-            <!-- Genre Card 3: شعر اجتماعي وحكمة -->
-            <a href="#social-wisdom-poetry-list" class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-200 text-center p-6 flex flex-col items-center justify-center hover:bg-orange-50 transition duration-300">
-                <img src="https://placehold.co/200x150/EEDC82/8B5E3C?text=اجتماعي+وحكمة" alt="شعر اجتماعي وحكمة" class="w-full h-32 object-cover rounded-lg mb-4" loading="lazy">
-                <h3 class="text-2xl font-semibold text-gray-800">شعر اجتماعي وحكمة</h3>
-            </a>
-        </div>
-    </section>
-
-    <!-- Specific Poet Sections (Virtual Pages for poets) -->
-    <!-- Samir Sbeih Poems -->
-    <section id="samir-sbeih-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر سمير صبيح</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">ليش تمشي؟</h4>
-                    <div class="poem-text text-gray-800">
-                        ليش تمشي؟ وادري عيونك تريدني،<br>
-                        شگد ما مشيت بيا وطن... روحي تظل يمك.<br>
-                        الدمعة بعيني ما تنشف،<br>
-                        وبعدك أبد ما نمت ليلة.<br>
-                        كل طيف يمر بيه، أحسبه إنت،<br>
-                        وأركض وراه وألگاني وهم.<br>
-                        يا ريت الزمن يرجع،<br>
-                        وترجعلي ضحكة سنيني.
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا دنيا شبية</h4>
-                    <div class="poem-text text-gray-800">
-                        يا دنيا شبية ما تخلصين،<br>
-                        ويا روحي شبيچ ما تفرحين.<br>
-                        كل يوم يكبر جرحي بلياچ،<br>
-                        وصار الضحك ما يلوگ لعيوني.<br>
-                        أنا المكتوبلي أظل بهمومي،<br>
-                        والحسرة بگلبي ما تفارگني.<br>
-                        يا ريت الموت يجي ويخلصني،<br>
-                        من دنيا ما بيها أي شي يسعدني.
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-200">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">ما ريدك</h4>
-                    <div class="poem-text text-gray-800">
-                        ما ريدك بعد لو صرت ملك الموت،<br>
-                        ولتردلي ولا تسأل على حالي.<br>
-                        كسرت گلبي وخذيت الروح مني،<br>
-                        تاليها بعتني بأرخص ليالي.<br>
-                        خليني وحيد، وحدي أحسنلي،<br>
-                        الجرح يطيب لو صار وگته.<br>
-                        عيني تشوفك بس گلبي ينساك،<br>
-                        ما اريدك تجي، كافي العذاب.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Jabbar Rasheed Poems -->
-    <section id="jabbar-rasheed-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر جبار رشيد</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا أول عشگ</h4>
-                    <div class="poem-text text-gray-800">
-                        يا أول عشگ حنّيتله وعيني بكتله دموع،<br>
-                        يا آخر نفس بضلوعي ظل بيّه يروح ويعود.<br>
-                        شلون أنسى الليالي البيها چنت وياك؟<br>
-                        شلون أطرد خيالك من يجي بجروحي؟<br>
-                        روحي بيك تتوسّل، تعال ارجعلي.<br>
-                        عمري بدونك ما يسوى ولا يوم.<br>
-                        يا بعد كل ناسي وهلي، يا أغلى من الروح،<br>
-                        لو تدري شگد أحبك، ما تبتعد عني.
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا ليل الشوگ</h4>
-                    <div class="poem-text text-gray-800">
-                        يا ليل الشوگ، بيا درب وديتني،<br>
-                        ودمعي يسيل على الخدين.<br>
-                        تعبت روحي من كثر الونين،<br>
-                        ومحد يگدر يفهمني يا ناس.<br>
-                        أنا الماشي دروب الحب وحدي،<br>
-                        وقلبي ينزف من كثر الجراح.<br>
-                        يا دنيتي كافي هجر وبعد،<br>
-                        ردولي حبيبي، كافي دموع.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ali Rasham Poems -->
-    <section id="ali-rasham-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشهيد الشاعر علي رشم</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">دمي يحكي</h4>
-                    <div class="poem-text text-gray-800">
-                        دمي يحكي قصة وطن،<br>
-                        بيها التضحية صارت فن.<br>
-                        ما خفت من الموت لحظة،<br>
-                        روحي فدوة لتراب الوطن.<br>
-                        لو كل قطرة دم تصير شراع،<br>
-                        أوصلك يا عراق لأعلى مكان.<br>
-                        أنا ابنك يا دجلة والفرات،<br>
-                        ترابك أغلى من الذهب، يا أغلى الأوطان.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Muzaffar Al-Nawab Poems -->
-    <section id="muzaffar-alnawab-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر مظفر النواب</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">ريحة خبز بالليل</h4>
-                    <div class="poem-text text-gray-800">
-                        ريحة خبز بالليل، تعاتبني،<br>
-                        تگلي مر بيه. يا ريل العشگ،<br>
-                        وين أخذتني يا ريل؟<br>
-                        الناس نامت، وأنا عيني مفتوحة.<br>
-                        يا هموم الدنيا، شكد كافية؟<br>
-                        گوم أرحم گلبي، يا ليل.<br>
-                        وين الفرح؟ وين السعادة؟<br>
-                        بس حزن بگلبي، ما يروح.
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">وحق روحي</h4>
-                    <div class="poem-text text-gray-800">
-                        وحق روحي التذوبن بيك،<br>
-                        ما بطلن من الدمع عيوني.<br>
-                        گلبي الك وحدك ينبض،<                        وكل دگة بي تنادي باسمك.<br>
-                        يا حلمي الجاي، يا كل عمري،<br>
-                        بدونك دنيتي مو حلوة.<br>
-                        خليني أعيش وياك،<br>
-                        كل لحظة وكل سنين.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kadhim Al-Katea Poems -->
-    <section id="kadhim-alkatea-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر كاظم اسماعيل الكاطع</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا روحي العذبتها</h4>
-                    <div class="poem-text text-gray-800">
-                        يا روحي العذبتها، بيمن تاليها تروح،<br>
-                        محد غيري يفهمك، يا كل الجروح.<br>
-                        أنا اللي سهرت الليالي وياك،<br>
-                        وعيني ما نامت بس تشوفك.<br>
-                        كل كلمة منك، أحفظها بگلبي،<br>
-                        وكل نظرة عينك، هي دوا روحي.<br>
-                        لا تعوفني وحدي، يا أغلى ناسي،<br>
-                        ترى بدونك، دنياي تصير ظلام.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Arian Al-Sayed Khalaf Poems -->
-    <section id="arian-alsayed-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر عريان السيد خلف</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">كلشي منك حلو</h4>
-                    <div class="poem-text text-gray-800">
-                        كلشي منك حلو، حتى عذابك يا حبيبي،<br>
-                        تظل بگلبي شعلة نار ما تطفي.<br>
-                        يا أول عشگ، يا آخر محبة،<br>
-                        روحي وروحي ليك تروح.<br>
-                        شگد حاولت أنساك، ما گدرت،<br>
-                        صورك بالبال، ما تفارگ عيني.<br>
-                        أنا العايش على ذكرى حبك،<br>
-                        وبدونك، دنيتي ما تسوى شي.
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا ديرتي</h4>
-                    <div class="poem-text text-gray-800">
-                        يا ديرتي الشالت هموم الناس،<br>
-                        وجروحها ما طابت بيوم.<br>
-                        كل بيت بيها قصة حزن،<br>
-                        وكل روح بيها تشكي الظلوم.<br>
-                        متى الفرح يجي لدروبها؟<br>
-                        وتنسى المر وتعيش بيوم.<br>
-                        هاي الناس الطيبة الفقيرة،<br>
-                        بس رب العباد يدري بظروفها.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Nazem Al-Hashi Poems -->
-    <section id="nazem-alhashi-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر ناظم الحاشي</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا روحي</h4>
-                    <div class="poem-text text-gray-800">
-                        يا روحي لا تحبين وتعبين،<br>
-                        تراهم مو أهل وعد ولا يوفون.<br>
-                        شگد ضحيت لأجلهم، ما دروا،<br>
-                        تاليها تركوني وحيد بحزني.<br>
-                        يا گلبي لا تلومني، ما بيدي،<br>
-                        هي هاي الدنيا، يوم وياك ويوم عليك.<br>
-                        عيش لنفسك، اترك الماضي،<br>
-                        باچر يجي والكل ينسونك.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Raheem Al-Maliki Poems -->
-    <section id="raheem-almaliki-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر رحيم المالكي</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">مشت روحي</h4>
-                    <div class="poem-text text-gray-800">
-                        مشت روحي وعفتها بيدك،<br>
-                        عساني ما مشيت خطوة بلياك.<br>
-                        كل درب أمشي، أحس خطواتي وياك،<br>
-                        وكل دگة بگلبي تنادي باسمك.<br>
-                        يا عيني لا تبچين بعد،<br>
-                        ترا الدمع يخلص ويظل الجرح.<br>
-                        أنا الما گدرت أعيش بلياك،<br>
-                        روحي تطلع مني لو شفتك.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Abd Al-Hussein Al-Halfy Poems -->
-    <section id="abd-alhussein-alhalfy-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر عبد الحسين الحلفي</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا گلبي</h4>
-                    <div class="poem-text text-gray-800">
-                        يا گلبي شبيك ما ترتاح؟<br>
-                        من كثر الهموم والحزن.<br>
-                        أنا اللي گضيت عمري حسرات،<br>
-                        والفرح ما مر بيه ولا يوم.<br>
-                        يا دنيتي كافي عذاب،<br>
-                        روحي ملت من كثر الآهات.<br>
-                        بس الصبر بگلبي ظل،<br>
-                        أنتظر الفرج، يا رب.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Kareem Al-Iraqi Poems -->
-    <section id="kareem-aliraqi-poems" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">قصائد الشاعر كريم العراقي</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا طيور الوداد</h4>
-                    <div class="poem-text text-gray-800">
-                        يا طيور الوداد، خذيني لحبيبي،<br>
-                        گوليله روحي ذابت من الشوگ.<br>
-                        عيوني ما نامت، تنتظر جيتك،<br>
-                        گلبي ينادي باسمك، يا أملي.<br>
-                        يا سنين العمر، ما تسوى بلياك،<br>
-                        الفرح يختفي، والهم يزيد.<br>
-                        أنا العاشق، أنا المتيم،<br>
-                        حبي الك، يا حبيبي، ما يموت.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Poetry Genre Specific Sections -->
-    <!-- Love, Romantic Poetry List -->
-    <section id="love-romantic-poetry-list" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">شعر الحب والغزل والرومانسية</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Poem 1: جبار رشيد - "يا أول عشگ" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا أول عشگ</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: جبار رشيد</p>
-                    <div class="poem-text text-gray-800">
-                        يا أول عشگ حنّيتله وعيني بكتله دموع،<br>
-                        يا آخر نفس بضلوعي ظل بيّه يروح ويعود.<br>
-                        شلون أنسى الليالي البيها چنت وياك؟<br>
-                        شلون أطرد خيالك من يجي بجروحي؟<br>
-                        روحي بيك تتوسّل، تعال ارجعلي.<br>
-                        عمري بدونك ما يسوى ولا يوم.<br>
-                        يا بعد كل ناسي وهلي، يا أغلى من الروح،<br>
-                        لو تدري شگد أحبك، ما تبتعد عني.
-                    </div>
-                </div>
-            </div>
-            <!-- Poem 2: كاظم اسماعيل الكاطع - "مر بيه" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">مر بيه</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: كاظم اسماعيل الكاطع</p>
-                    <div class="poem-text text-gray-800">
-                        مر بيه يا هوى العشاگ من تمر،<br>
-                        وخليلي شي من ريحة هدومك.<br>
-                        أنا بلياك وردة وماتت من العطش،<br>
-                        وبدونك عيني ما تشوف النوم.<br>
-                        كل العمر يمشي وأنتظر ملكاك،<                        يا حلم السنين وكل دگة بگلبي.<br>
-                        كون العمر يخلص وأنا بحضنك،<br>
-                        لا أريد شي من الدنيا بس قربك.
-                    </div>
-                </div>
-            </div>
-            <!-- Poem 3: سمير صبيح - "وينك يل رحت" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-200">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">وينك يل رحت</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: سمير صبيح</p>
-                    <div class="poem-text text-gray-800">
-                        وينك يل رحت؟ وشوكي ظل بيك،<br>
-                        كل درب مشيته أحس خطوة الك بيه.<br>
-                        عيوني ما تمل النظر لو مر طيفك،<br>
-                        وروحي تذوب حباً بيك.<br>
-                        شلون أداري جرح گلبي بلياك؟<br>
-                        وانت صرت الدوا والمرهم لجروحي.<br>
-                        يا دنيا صرت بعيني بس طيف،<br>
-                        لو ما شوكه ما أگدر أعيش لحظة.
-                    </div>
-                </div>
-            </div>
-             <!-- Poem 4: عريان السيد خلف - "كلشي منك حلو" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-300">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">كلشي منك حلو</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: عريان السيد خلف</p>
-                    <div class="poem-text text-gray-800">
-                        كلشي منك حلو، حتى عذابك يا حبيبي،<br>
-                        تظل بگلبي شعلة نار ما تطفي.<br>
-                        يا أول عشگ، يا آخر محبة،<br>
-                        روحي وروحي ليك تروح.<br>
-                        شگد حاولت أنساك، ما گدرت،<br>
-                        صورك بالبال، ما تفارگ عيني.<br>
-                        أنا العايش على ذكرى حبك،<br>
-                        وبدونك، دنيتي ما تسوى شي.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bold, Patriotic Poetry List -->
-    <section id="bold-patriotic-poetry-list" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">شعر جريء ووطني</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Poem 1: مظفر النواب - "للريل وحمد" (مقتطف) -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">للريل وحمد (مقتطف)</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: مظفر النواب</p>
-                    <div class="poem-text text-gray-800">
-                        يا ريل صيح بقوة يا ريل،<br>
-                        خلهم يسمعون الوجع بالريل.<br>
-                        هاي الناس، هاي الوجوه التعبانة،<br>
-                        منين اجوها هيچي ضيم وويل؟<br>
-                        يا ريل، گص الروس العدلة،<br>
-                        خل نخلص من هالذل والهوان،<br>
-                        لا تعاتبني بعد، دمي يفور،<br>
-                        أنا الثاير وما أقبل بالظلم.
-                    </div>
-                </div>
-            </div>
-            <!-- Poem 2: علي رشم - "دمي يحكي" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">دمي يحكي</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشهيد الشاعر: علي رشم</p>
-                    <div class="poem-text text-gray-800">
-                        دمي يحكي قصة وطن،<br>
-                        بيها التضحية صارت فن.<br>
-                        ما خفت من الموت لحظة،<br>
-                        روحي فدوة لتراب الوطن.<br>
-                        لو كل قطرة دم تصير شراع،<br>
-                        أوصلك يا عراق لأعلى مكان.<br>
-                        أنا ابنك يا دجلة والفرات،<br>
-                        ترابك أغلى من الذهب، يا أغلى الأوطان.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social & Wisdom Poetry List -->
-    <section id="social-wisdom-poetry-list" class="container mx-auto py-16 px-6 md:px-12 hidden-section">
-        <h2 class="text-5xl font-bold text-gray-800 text-center mb-12">شعر اجتماعي وحكمة</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Poem 1: عريان السيد خلف - "يا ديرتي" (مقتطف) -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا ديرتي (مقتطف)</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: عريان السيد خلف</p>
-                    <div class="poem-text text-gray-800">
-                        يا ديرتي الشالت هموم الناس،<br>
-                        وجروحها ما طابت بيوم.<br>
-                        كل بيت بيها قصة حزن،<br>
-                        وكل روح بيها تشكي الظلوم.<br>
-                        متى الفرح يجي لدروبها؟<                        وتنسى المر وتعيش بيوم.<br>
-                        هاي الناس الطيبة الفقيرة،<br>
-                        بس رب العباد يدري بظروفها.
-                    </div>
-                </div>
-            </div>
-             <!-- Poem 2: ناظم الحاشي - "يا روحي" -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl animation-delay-100">
-                <div class="p-6">
-                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">يا روحي</h4>
-                    <p class="text-lg text-gray-700 mb-4">للشاعر: ناظم الحاشي</p>
-                    <div class="poem-text text-gray-800">
-                        يا روحي لا تحبين وتعبين،<br>
-                        تراهم مو أهل وعد ولا يوفون.<br>
-                        شگد ضحيت لأجلهم، ما دروا،<br>
-                        تاليها تركوني وحيد بحزني.<br>
-                        يا گلبي لا تلومني، ما بيدي،<                        هي هاي الدنيا، يوم وياك ويوم عليك.<br>
-                        عيش لنفسك، اترك الماضي،<br>
-                        باچر يجي والكل ينسونك.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Us Section -->
-    <section id="contact-us" class="bg-orange-100 py-16 px-6 md:px-12 text-center rounded-lg shadow-inner mx-auto max-w-4xl fade-in-slide-rtl" style="background-color: #EEDC82; margin-top: 4rem; margin-bottom: 4rem;">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">تواصل معنا</h2>
-        <p class="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            للاستفسارات، الاقتراحات، أو إضافة قصائد جديدة للموسوعة، يرجى ملء النموذج أدناه.
-        </p>
-        <form class="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <input type="text" placeholder="اسمك الكامل..." class="w-full p-4 rounded-full border-2 border-gray-300 focus:outline-none focus:border-orange-500 text-right text-lg">
-            <input type="email" placeholder="بريدك الإلكتروني..." class="w-full p-4 rounded-full border-2 border-gray-300 focus:outline-none focus:border-orange-500 text-right text-lg">
-            <textarea placeholder="رسالتك..." rows="5" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-orange-500 text-right text-lg"></textarea>
-            <button type="submit" class="btn-primary bg-orange-500 text-white text-xl font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 w-full" aria-label="أرسل الرسالة">
-                أرسل الرسالة
+        <section id="dynamic-content" class="hidden-section flex flex-col items-start pt-8">
+            <button id="back-button" class="back-button mb-8">
+                <i class="fas fa-arrow-right ml-2"></i> العودة للرئيسية
             </button>
-        </form>
-    </section>
+            <h2 id="dynamic-title" class="text-5xl font-bold text-gray-800 text-center w-full mb-12"></h2>
+            <div id="poems-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                </div>
+        </section>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-900 py-10 px-6 md:px-12 text-center text-gray-400">
+        <section id="search-results-section" class="hidden-section flex flex-col items-start pt-8">
+            <button id="back-from-search-button" class="back-button mb-8">
+                <i class="fas fa-arrow-right ml-2"></i> العودة للرئيسية
+            </button>
+            <h2 class="text-5xl font-bold text-gray-800 text-center w-full mb-12">نتائج البحث</h2>
+            <div id="search-results-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                </div>
+            <p id="no-search-results" class="text-center text-gray-600 text-xl w-full mt-8 hidden">لا توجد نتائج مطابقة لبحثك.</p>
+        </section>
+
+    </main>
+
+    <footer id="footer-copyright" class="bg-gray-900 py-10 px-6 md:px-12 text-center text-gray-400 mt-16">
         <div class="max-w-4xl mx-auto">
-            <!-- About Us & Copyright -->
             <h2 class="text-3xl font-bold text-gray-200 mb-4">موسوعة الشعر الشعبي العراقي</h2>
             <p class="text-md text-gray-300 leading-relaxed mb-6">
                 بوابتك الشاملة لأجمل القصائد والأبيات الشعرية لأبرز شعراء العراق العظام.<br>
@@ -845,7 +425,6 @@
                 © 2025 كرار حيدر. جميع الحقوق محفوظة.
             </p>
 
-            <!-- Social Media Links with Icons -->
             <div class="flex justify-center space-x-6 space-x-reverse mb-6">
                 <a href="https://www.instagram.com/k9x9i" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-400 transition duration-300 text-3xl" aria-label="Instagram">
                     <i class="fab fa-instagram"></i>
@@ -860,8 +439,7 @@
                     <i class="fab fa-tiktok"></i>
                 </a>
             </div>
-
-            <!-- Quick Links -->
+            
             <div class="flex flex-wrap justify-center space-x-4 space-x-reverse text-sm footer-links">
                 <a href="#" class="text-gray-400 hover:text-orange-400 transition duration-300">سياسة الخصوصية</a>
                 <span class="text-gray-500 hidden md:inline">|</span>
@@ -891,183 +469,362 @@
             lastScrollY = window.scrollY;
         });
 
-        // JavaScript for Scroll-Triggered Animations (Fade-in/Slide-in from right)
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-in');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-slide-rtl').forEach(element => {
-                observer.observe(element);
-            });
-
-            // Add lazy loading to images
-            document.querySelectorAll('img').forEach(img => {
-                img.setAttribute('loading', 'lazy');
-            });
-
-            // Handle navigation to sections and showing/hiding them
-            const allSections = document.querySelectorAll('.container.mx-auto'); // All major content sections
-            const poetSections = document.querySelectorAll('section[id$="-poems"]'); // Specific poet sections
-            const genreSections = document.querySelectorAll('section[id$="-poetry-list"]'); // Specific genre sections
-            const heroSection = document.getElementById('hero');
-            const poetsDirectory = document.getElementById('poets-directory');
-            const poetryGenres = document.getElementById('poetry-genres');
-
-            function hideAllContentSections() {
-                allSections.forEach(section => {
-                    if (section.id !== 'hero' && section.id !== 'poets-directory' && section.id !== 'poetry-genres' && section.id !== 'contact-us') {
-                        section.classList.add('hidden-section');
-                    }
-                });
+        // Data Structure for Poets and Poems
+        const poetsData = {
+            "muzaffar-alnawab": {
+                name: "مظفر النواب",
+                poems: [
+                    { title: "للريل وحمد", text: "يا ريل صيح بقوة يا ريل،\nخلهم يسمعون الوجع بالريل.\nهاي الناس، هاي الوجوه التعبانة،\nمنين اجوها هيچي ضيم وويل؟\nيا ريل، گص الروس العدلة،\nخل نخلص من هالذل والهوان،\nلا تعاتبني بعد، دمي يفور،\nأنا الثاير وما أقبل بالظلم.", genres: ["bold-patriotic"] },
+                    { title: "وحق روحي", text: "وحق روحي التذوبن بيك،\nما بطلن من الدمع عيوني.\nگلبي الك وحدك ينبض،\nوكل دگة بي تنادي باسمك.\nيا حلمي الجاي، يا كل عمري،\nبدونك دنيتي مو حلوة.\nخليني أعيش وياك،\nكل لحظة وكل سنين.", genres: ["love-romantic", "sad-melancholy"] },
+                    { title: "ريحة خبز بالليل", text: "ريحة خبز بالليل، تعاتبني،\nتگلي مر بيه. يا ريل العشگ،\nوين أخذتني يا ريل؟\nالناس نامت، وأنا عيني مفتوحة.\nيا هموم الدنيا، شكد كافية؟\nگوم أرحم گلبي، يا ليل.\nوين الفرح؟ وين السعادة؟\nبس حزن بگلبي، ما يروح.", genres: ["sad-melancholy", "social-wisdom"] }
+                ]
+            },
+            "arian-alsayed": {
+                name: "عريان السيد خلف",
+                poems: [
+                    { title: "كلشي منك حلو", text: "كلشي منك حلو، حتى عذابك يا حبيبي،\nتظل بگلبي شعلة نار ما تطفي.\nيا أول عشگ، يا آخر محبة،\nروحي وروحي ليك تروح.\nشگد حاولت أنساك، ما گدرت،\nصورك بالبال، ما تفارگ عيني.\nأنا العايش على ذكرى حبك،\nوبدونك، دنيتي ما تسوى شي.", genres: ["love-romantic", "sad-melancholy"] },
+                    { title: "يا ديرتي", text: "يا ديرتي الشالت هموم الناس،\nوجروحها ما طابت بيوم.\nكل بيت بيها قصة حزن،\nوكل روح بيها تشكي الظلوم.\nمتى الفرح يجي لدروبها؟\nوتنسى المر وتعيش بيوم.\nهاي الناس الطيبة الفقيرة،\nبس رب العباد يدري بظروفها.", genres: ["social-wisdom", "sad-melancholy"] }
+                ]
+            },
+            "kadhim-alkatea": {
+                name: "كاظم اسماعيل الكاطع",
+                poems: [
+                    { title: "يا روحي العذبتها", text: "يا روحي العذبتها، بيمن تاليها تروح،\nمحد غيري يفهمك، يا كل الجروح.\nأنا اللي سهرت الليالي وياك،\nوعيني ما نامت بس تشوفك.\nكل كلمة منك، أحفظها بگلبي،\nوكل نظرة عينك، هي دوا روحي.\nلا تعوفني وحدي، يا أغلى ناسي،\nترى بدونك، دنياي تصير ظلام.", genres: ["love-romantic", "sad-melancholy"] },
+                    { title: "مر بيه", text: "مر بيه يا هوى العشاگ من تمر،\nوخليلي شي من ريحة هدومك.\nأنا بلياك وردة وماتت من العطش،\nوبدونك عيني ما تشوف النوم.\nكل العمر يمشي وأنتظر ملكاك،\nيا حلم السنين وكل دگة بگلبي.\nكون العمر يخلص وأنا بحضنك،\nلا أريد شي من الدنيا بس قربك.", genres: ["love-romantic"] }
+                ]
+            },
+            "samir-sbeih": {
+                name: "سمير صبيح",
+                poems: [
+                    { title: "ليش تمشي؟", text: "ليش تمشي؟ وادري عيونك تريدني،\nشگد ما مشيت بيا وطن... روحي تظل يمك.\nالدمعة بعيني ما تنشف،\nوبعدك أبد ما نمت ليلة.\nكل طيف يمر بيه، أحسبه إنت،\nوأركض وراه وألگاني وهم.\nيا ريت الزمن يرجع،\nوترجعلي ضحكة سنيني.", genres: ["sad-melancholy", "love-romantic"] },
+                    { title: "يا دنيا شبية", text: "يا دنيا شبية ما تخلصين،\nويا روحي شبيچ ما تفرحين.\nكل يوم يكبر جرحي بلياچ،\nوصار الضحك ما يلوگ لعيوني.\nأنا المكتوبلي أظل بهمومي،\nوالحسرة بگلبي ما تفارگني.\nيا ريت الموت يجي ويخلصني،\nمن دنيا ما بيها أي شي يسعدني.", genres: ["sad-melancholy", "social-wisdom"] },
+                    { title: "ما ريدك", text: "ما ريدك بعد لو صرت ملك الموت،\nولتردلي ولا تسأل على حالي.\nكسرت گلبي وخذيت الروح مني،\nتاليها بعتني بأرخص ليالي.\nخليني وحيد، وحدي أحسنلي،\nالجرح يطيب لو صار وگته.\nعيني تشوفك بس گلبي ينساك،\nما اريدك تجي، كافي العذاب.", genres: ["sad-melancholy"] }
+                ]
+            },
+            "jabbar-rasheed": {
+                name: "جبار رشيد",
+                poems: [
+                    { title: "يا أول عشگ", text: "يا أول عشگ حنّيتله وعيني بكتله دموع،\nيا آخر نفس بضلوعي ظل بيّه يروح ويعود.\nشلون أنسى الليالي البيها چنت وياك؟\nشلون أطرد خيالك من يجي بجروحي؟\nروحي بيك تتوسّل، تعال ارجعلي.\nعمري بدونك ما يسوى ولا يوم.\nيا بعد كل ناسي وهلي، يا أغلى من الروح،\nلو تدري شگد أحبك، ما تبتعد عني.", genres: ["love-romantic", "sad-melancholy"] },
+                    { title: "يا ليل الشوگ", text: "يا ليل الشوگ، بيا درب وديتني،\nودمعي يسيل على الخدين.\nتعبت روحي من كثر الونين،\nومحد يگدر يفهمني يا ناس.\nأنا الماشي دروب الحب وحدي،\nوقلبي ينزف من كثر الجراح.\nيا دنيتي كافي هجر وبعد،\nردولي حبيبي، كافي دموع.", genres: ["sad-melancholy"] }
+                ]
+            },
+            "ali-rasham": {
+                name: "علي رشم",
+                poems: [
+                    { title: "دمي يحكي", text: "دمي يحكي قصة وطن،\nبيها التضحية صارت فن.\nما خفت من الموت لحظة،\nروحي فدوة لتراب الوطن.\nلو كل قطرة دم تصير شراع،\nأوصلك يا عراق لأعلى مكان.\nأنا ابنك يا دجلة والفرات،\nترابك أغلى من الذهب، يا أغلى الأوطان.", genres: ["bold-patriotic"] }
+                ]
+            },
+            "nazem-alhashi": {
+                name: "ناظم الحاشي",
+                poems: [
+                    { title: "يا روحي", text: "يا روحي لا تحبين وتعبين،\nتراهم مو أهل وعد ولا يوفون.\nشگد ضحيت لأجلهم، ما دروا،\nتاليها تركوني وحيد بحزني.\nيا گلبي لا تلومني، ما بيدي،\nهي هاي الدنيا، يوم وياك ويوم عليك.\nعيش لنفسك، اترك الماضي،\nباچر يجي والكل ينسونك.", genres: ["social-wisdom", "sad-melancholy"] }
+                ]
+            },
+            "raheem-almaliki": {
+                name: "رحيم المالكي",
+                poems: [
+                    { title: "مشت روحي", text: "مشت روحي وعفتها بيدك،\nعساني ما مشيت خطوة بلياك.\nكل درب أمشي، أحس خطواتي وياك،\nوكل دگة بگلبي تنادي باسمك.\nيا عيني لا تبچين بعد،\nترا الدمع يخلص ويظل الجرح.\nأنا الما گدرت أعيش بلياك،\nروحي تطلع مني لو شفتك.", genres: ["love-romantic", "sad-melancholy"] }
+                ]
+            },
+            "abd-alhussein-alhalfy": {
+                name: "عبد الحسين الحلفي",
+                poems: [
+                    { title: "يا گلبي", text: "يا گلبي شبيك ما ترتاح؟\nمن كثر الهموم والحزن.\nأنا اللي گضيت عمري حسرات،\nوالفرح ما مر بيه ولا يوم.\nيا دنيتي كافي عذاب،\nروحي ملت من كثر الآهات.\nبس الصبر بگلبي ظل،\nأنتظر الفرج، يا رب.", genres: ["sad-melancholy", "social-wisdom"] }
+                ]
+            },
+            "ahmed-matar": {
+                name: "أحمد مطر",
+                poems: [
+                    { title: "نحن باقون", text: "نحن باقون... والأسماء قد تتغير،\nلكن وجه العدو لا يتغير.\nنحن صوت الأرض، صوت الشعب،\nمن تحت الركام، من لهيب النار.\nلا تظنوا أننا قد متنا،\nفنحن الشجر الذي لا يموت.\nكلما قطعوا منا غصناً،\nنبتت آلاف الأغصان من جديد.", genres: ["bold-patriotic", "social-wisdom"] },
+                    { title: "لا تشتروا العز", text: "لا تشتروا العز ببيع الأرض،\nفالبيع بيع الروح، بيع الشرف.\nالوطن ليس سوقاً للمساومة،\nولا سلعة تباع وتشترى.\nحافظوا عليه، فهو دمكم،\nفهو شرفكم، وهو عزكم.\nفلا قيمة لأرض تبيعونها،\nإذا ما ضاع فيها العز والحرف.", genres: ["bold-patriotic", "social-wisdom"] }
+                ]
+            },
+            "saheb-aldawiri": {
+                name: "صاحب الضويري",
+                poems: [
+                    { title: "بگت روحي", text: "بگت روحي ودمعي يجرن عليك،\nيا ليل الشوگ، شسويت بيّه.\nأنا بلياك وردة ذبلت،\nوالگلب من فرگاك مليته.\nترد الروح لو ردّيت،\nوكل فرحة تجي لو شفتك.\nيا أغلى من روحي، يا كل عمري،\nشگد مشتاگ لشوفتك يا حبيبي.", genres: ["love-romantic", "sad-melancholy"] }
+                ]
+            },
+            "ehab-almaliki": {
+                name: "إيهاب المالكي",
+                poems: [
+                    { title: "خلص كلشي", text: "خلص كلشي بلياك، والوكت راح،\nوبقت روحي الك، ما تريد سواك.\nأنا اللي تعبت من كثر البچي،\nوالعين ما شافت غيرك إنت.\nيا گلبي لا تلومني على حبي،\nهذا هو العشگ، مو بيدي ولا بيدك.\nبس الحسرة بگلبي، ما تروح،\nوالدمعة بعيني، ما تنشف ابد.", genres: ["sad-melancholy", "love-romantic"] }
+                ]
+            },
+            "mohammad-alghabban": {
+                name: "محمد الغبّان",
+                poems: [
+                    { title: "عصفور باليد", text: "عصفور باليد، أحسن من عشره على الشجر،\nوهذا مثل يگولونه، يا ناس، بگلبي.<br>\nلا تركض ورا السراب، تتعب،\nوخليك قنوع باللي موجود عندك.\nالدنيا ما بيها أمان، تتغير كل يوم،\nواللي يبيعك، باعه، لا تشتريه.\nاحفظ نفسك من الشرور،\nوعيش بسلام، ويا رب. ", genres: ["social-wisdom"] }
+                ]
             }
+        };
 
-            function showSection(sectionId) {
-                hideAllContentSections();
-                const sectionToShow = document.getElementById(sectionId);
-                if (sectionToShow) {
-                    sectionToShow.classList.remove('hidden-section');
-                    sectionToShow.scrollIntoView({ behavior: 'smooth' });
-                }
+        const genresData = {
+            "love-romantic": {
+                name: "شعر الحب والغزل والرومانسية",
+                poemIds: [
+                    { poetId: "muzaffar-alnawab", poemTitle: "وحق روحي" },
+                    { poetId: "arian-alsayed", poemTitle: "كلشي منك حلو" },
+                    { poetId: "kadhim-alkatea", poemTitle: "يا روحي العذبتها" },
+                    { poetId: "kadhim-alkatea", poemTitle: "مر بيه" },
+                    { poetId: "samir-sbeih", poemTitle: "ليش تمشي؟" },
+                    { poetId: "jabbar-rasheed", poemTitle: "يا أول عشگ" },
+                    { poetId: "raheem-almaliki", poemTitle: "مشت روحي" },
+                    { poetId: "saheb-aldawiri", poemTitle: "بگت روحي" },
+                    { poetId: "ehab-almaliki", poemTitle: "خلص كلشي" }
+                ]
+            },
+            "bold-patriotic": {
+                name: "شعر جريء ووطني",
+                poemIds: [
+                    { poetId: "muzaffar-alnawab", poemTitle: "للريل وحمد" },
+                    { poetId: "ali-rasham", poemTitle: "دمي يحكي" },
+                    { poetId: "ahmed-matar", poemTitle: "نحن باقون" },
+                    { poetId: "ahmed-matar", poemTitle: "لا تشتروا العز" }
+                ]
+            },
+            "social-wisdom": {
+                name: "شعر اجتماعي وحكمة",
+                poemIds: [
+                    { poetId: "muzaffar-alnawab", poemTitle: "ريحة خبز بالليل" },
+                    { poetId: "arian-alsayed", poemTitle: "يا ديرتي" },
+                    { poetId: "samir-sbeih", poemTitle: "يا دنيا شبية" },
+                    { poetId: "nazem-alhashi", poemTitle: "يا روحي" },
+                    { poetId: "abd-alhussein-alhalfy", poemTitle: "يا گلبي" },
+                    { poetId: "ahmed-matar", poemTitle: "نحن باقون" },
+                    { poetId: "ahmed-matar", poemTitle: "لا تشتروا العز" },
+                    { poetId: "mohammad-alghabban", poemTitle: "عصفور باليد" }
+                ]
+            },
+            "sad-melancholy": {
+                name: "شعر حزين وشجن",
+                poemIds: [
+                    { poetId: "muzaffar-alnawab", poemTitle: "وحق روحي" },
+                    { poetId: "muzaffar-alnawab", poemTitle: "ريحة خبز بالليل" },
+                    { poetId: "arian-alsayed", poemTitle: "كلشي منك حلو" },
+                    { poetId: "arian-alsayed", poemTitle: "يا ديرتي" },
+                    { poetId: "kadhim-alkatea", poemTitle: "يا روحي العذبتها" },
+                    { poetId: "samir-sbeih", poemTitle: "ليش تمشي؟" },
+                    { poetId: "samir-sbeih", poemTitle: "يا دنيا شبية" },
+                    { poetId: "samir-sbeih", poemTitle: "ما ريدك" },
+                    { poetId: "jabbar-rasheed", poemTitle: "يا أول عشگ" },
+                    { poetId: "jabbar-rasheed", poemTitle: "يا ليل الشوگ" },
+                    { poetId: "nazem-alhashi", poemTitle: "يا روحي" },
+                    { poetId: "raheem-almaliki", poemTitle: "مشت روحي" },
+                    { poetId: "abd-alhussein-alhalfy", poemTitle: "يا گلبي" },
+                    { poetId: "saheb-aldawiri", poemTitle: "بگت روحي" },
+                    { poetId: "ehab-almaliki", poemTitle: "خلص كلشي" }
+                ]
+            },
+            "humorous-critical": {
+                name: "شعر فكاهي ونقدي",
+                poemIds: [
+                    // Add humorous/critical poems here later if available
+                ]
             }
+        };
 
-            // Initially hide all specific poet/genre sections
-            poetSections.forEach(section => section.classList.add('hidden-section'));
-            genreSections.forEach(section => section.classList.add('hidden-section'));
 
-            // Navigation links click handlers
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1); // Remove '#'
-                    if (targetId === 'hero') {
-                        // For home, show default sections and scroll to hero
-                        poetSections.forEach(section => section.classList.add('hidden-section'));
-                        genreSections.forEach(section => section.classList.add('hidden-section'));
-                        heroSection.scrollIntoView({ behavior: 'smooth' });
-                        poetsDirectory.classList.remove('hidden-section'); // Show poets directory
-                        poetryGenres.classList.remove('hidden-section'); // Show poetry genres
-                    } else if (targetId === 'poets-directory') {
-                        // For poets directory, show only it initially
-                        hideAllContentSections();
-                        poetsDirectory.classList.remove('hidden-section');
-                        poetsDirectory.scrollIntoView({ behavior: 'smooth' });
-                    } else if (targetId === 'poetry-genres') {
-                        // For poetry genres, show only it initially
-                        hideAllContentSections();
-                        poetryGenres.classList.remove('hidden-section');
-                        poetryGenres.scrollIntoView({ behavior: 'smooth' });
-                    } else if (targetId === 'contact-us') {
-                        hideAllContentSections();
-                        document.getElementById('contact-us').classList.remove('hidden-section');
-                        document.getElementById('contact-us').scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        // For poet or genre specific links, show only that section
-                        showSection(targetId);
+        const homeSection = document.getElementById('home-section');
+        const dynamicContentSection = document.getElementById('dynamic-content');
+        const searchResultsSection = document.getElementById('search-results-section');
+        const dynamicTitle = document.getElementById('dynamic-title');
+        const poemsContainer = document.getElementById('poems-container');
+        const backButton = document.getElementById('back-button');
+        const backFromSearchButton = document.getElementById('back-from-search-button');
+        const searchInput = document.getElementById('searchInput');
+        const searchResultsContainer = document.getElementById('search-results-container');
+        const noSearchResults = document.getElementById('no-search-results');
+        
+        // Function to hide all main sections
+        function hideAllSections() {
+            homeSection.classList.add('hidden-section');
+            dynamicContentSection.classList.add('hidden-section');
+            searchResultsSection.classList.add('hidden-section');
+        }
+
+        // Function to show home section
+        function showHomeSection() {
+            hideAllSections();
+            homeSection.classList.remove('hidden-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            searchInput.value = ''; // Clear search input
+        }
+
+        // Function to display poems for a poet
+        function displayPoetPoems(poetId) {
+            hideAllSections();
+            dynamicContentSection.classList.remove('hidden-section');
+            const poet = poetsData[poetId];
+            dynamicTitle.textContent = `قصائد الشاعر ${poet.name}`;
+            poemsContainer.innerHTML = ''; // Clear previous poems
+
+            if (poet && poet.poems.length > 0) {
+                poet.poems.forEach(poem => {
+                    const poemCard = `
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
+                            <div class="p-6">
+                                <h4 class="text-2xl font-semibold text-gray-800 mb-2">${poem.title}</h4>
+                                <p class="text-lg text-gray-700 mb-4">للشاعر: ${poet.name}</p>
+                                <div class="poem-text text-gray-800">${poem.text}</div>
+                                <button class="copy-button mt-4" data-poem-text="${poem.text}" aria-label="نسخ القصيدة">
+                                    <i class="fas fa-copy ml-2"></i> نسخ القصيدة
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    poemsContainer.insertAdjacentHTML('beforeend', poemCard);
+                });
+            } else {
+                poemsContainer.innerHTML = `<p class="text-center text-gray-600 text-xl col-span-full">لا توجد قصائد لهذا الشاعر حالياً.</p>`;
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            addCopyButtonListeners();
+        }
+
+        // Function to display poems for a genre
+        function displayGenrePoems(genreId) {
+            hideAllSections();
+            dynamicContentSection.classList.remove('hidden-section');
+            const genre = genresData[genreId];
+            dynamicTitle.textContent = genre.name;
+            poemsContainer.innerHTML = ''; // Clear previous poems
+
+            if (genre && genre.poemIds.length > 0) {
+                genre.poemIds.forEach(poemRef => {
+                    const poet = poetsData[poemRef.poetId];
+                    if (poet) {
+                        const poem = poet.poems.find(p => p.title === poemRef.poemTitle);
+                        if (poem) {
+                            const poemCard = `
+                                <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
+                                    <div class="p-6">
+                                        <h4 class="text-2xl font-semibold text-gray-800 mb-2">${poem.title}</h4>
+                                        <p class="text-lg text-gray-700 mb-4">للشاعر: ${poet.name}</p>
+                                        <div class="poem-text text-gray-800">${poem.text}</div>
+                                        <button class="copy-button mt-4" data-poem-text="${poem.text}" aria-label="نسخ القصيدة">
+                                            <i class="fas fa-copy ml-2"></i> نسخ القصيدة
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            poemsContainer.insertAdjacentHTML('beforeend', poemCard);
+                        }
                     }
                 });
-            });
-
-            // Poet links click handlers
-            document.querySelectorAll('.poet-entry a').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    showSection(targetId);
-                });
-            });
-
-            // Genre cards click handlers
-            document.querySelectorAll('#poetry-genres a').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    showSection(targetId);
-                });
-            });
-
-            // Search functionality (client-side basic filtering)
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('keyup', function() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const allPoetryCards = document.querySelectorAll('.poetry-card');
-                const allPoetEntries = document.querySelectorAll('.poet-entry');
-
-                // If search term is empty, show default sections
-                if (searchTerm === '') {
-                    hideAllContentSections(); // Hide all specific sections
-                    heroSection.scrollIntoView({ behavior: 'smooth' }); // Scroll back to top
-                    poetsDirectory.classList.remove('hidden-section'); // Show poets directory
-                    poetryGenres.classList.remove('hidden-section'); // Show poetry genres
-                } else {
-                    // Hide all sections except for contact-us
-                    allSections.forEach(section => {
-                        if (section.id !== 'contact-us' && section.id !== 'hero') { // Keep hero for context
-                            section.classList.add('hidden-section');
-                        }
-                    });
-
-                    // Filter and show matching poetry cards (poems)
-                    let foundPoem = false;
-                    allPoetryCards.forEach(card => {
-                        const poemText = card.querySelector('.poem-text')?.textContent.toLowerCase() || '';
-                        const poemTitle = card.querySelector('h4')?.textContent.toLowerCase() || '';
-                        const poetName = card.querySelector('p')?.textContent.toLowerCase() || ''; // Assuming poet name is in a <p> tag
-
-                        if (poemText.includes(searchTerm) || poemTitle.includes(searchTerm) || poetName.includes(searchTerm)) {
-                            card.closest('section').classList.remove('hidden-section'); // Show the section containing the poem
-                            card.style.display = 'block'; // Show the card itself
-                            foundPoem = true;
-                        } else {
-                            card.style.display = 'none'; // Hide non-matching cards
-                        }
-                    });
-
-                    // Filter and show matching poet entries (poets)
-                    let foundPoet = false;
-                    allPoetEntries.forEach(poet => {
-                        const poetName = poet.querySelector('p')?.textContent.toLowerCase() || '';
-                        if (poetName.includes(searchTerm)) {
-                            poetsDirectory.classList.remove('hidden-section'); // Show poets directory
-                            poet.style.display = 'flex'; // Show the poet entry
-                            foundPoet = true;
-                        } else {
-                            poet.style.display = 'none'; // Hide non-matching poet entries
-                        }
-                    });
-
-                    // If no poem or poet found, consider adding a "no results" message
-                    if (!foundPoem && !foundPoet && searchTerm !== '') {
-                        // You might want to display a message like "لا توجد نتائج بحث"
-                        // For simplicity, we'll just not show any poetry cards if nothing matches.
-                    }
-                }
-            });
-
-            // Adjust display for sections on initial load or navigation
-            function adjustSectionVisibilityOnLoad() {
-                // Hide all specific poet/genre sections initially
-                poetSections.forEach(section => section.classList.add('hidden-section'));
-                genreSections.forEach(section => section.classList.add('hidden-section'));
-                document.getElementById('contact-us').classList.add('hidden-section'); // Hide contact us
-                
-                // Ensure poets directory and genres are visible by default on home
-                poetsDirectory.classList.remove('hidden-section');
-                poetryGenres.classList.remove('hidden-section');
+            } else {
+                poemsContainer.innerHTML = `<p class="text-center text-gray-600 text-xl col-span-full">لا توجد قصائد في هذا القسم حالياً.</p>`;
             }
-            adjustSectionVisibilityOnLoad(); // Call on initial load
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            addCopyButtonListeners();
+        }
+
+        // Add event listeners for Poet entries
+        document.querySelectorAll('.poet-entry').forEach(entry => {
+            entry.addEventListener('click', function(event) {
+                event.preventDefault();
+                const poetId = this.dataset.poetId;
+                displayPoetPoems(poetId);
+            });
         });
+
+        // Add event listeners for Genre entries
+        document.querySelectorAll('.genre-entry').forEach(entry => {
+            entry.addEventListener('click', function(event) {
+                event.preventDefault();
+                const genreId = this.dataset.genreId;
+                displayGenrePoems(genreId);
+            });
+        });
+
+        // Back button functionality
+        backButton.addEventListener('click', showHomeSection);
+        backFromSearchButton.addEventListener('click', showHomeSection);
+
+        // Header Navigation Links
+        document.getElementById('home-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            showHomeSection();
+        });
+        document.getElementById('nav-poets').addEventListener('click', function(event) {
+            event.preventDefault();
+            showHomeSection();
+            document.getElementById('poets-directory').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('nav-genres').addEventListener('click', function(event) {
+            event.preventDefault();
+            showHomeSection();
+            document.getElementById('poetry-genres').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Copy button functionality
+        function addCopyButtonListeners() {
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const poemText = this.dataset.poemText;
+                    navigator.clipboard.writeText(poemText).then(() => {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ!';
+                        this.classList.add('copied');
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                });
+            });
+        }
+
+        // Search functionality
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            searchResultsContainer.innerHTML = ''; // Clear previous results
+            noSearchResults.classList.add('hidden'); // Hide no results message
+
+            if (searchTerm === '') {
+                showHomeSection(); // Go back to home if search is empty
+                return;
+            }
+
+            hideAllSections();
+            searchResultsSection.classList.remove('hidden-section');
+            let hasResults = false;
+
+            // Search through all poems
+            for (const poetId in poetsData) {
+                const poet = poetsData[poetId];
+                poet.poems.forEach(poem => {
+                    const poemContent = `${poem.title} ${poem.text} ${poet.name}`.toLowerCase();
+                    if (poemContent.includes(searchTerm)) {
+                        const poemCard = `
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden poetry-card fade-in-slide-rtl">
+                                <div class="p-6">
+                                    <h4 class="text-2xl font-semibold text-gray-800 mb-2">${poem.title}</h4>
+                                    <p class="text-lg text-gray-700 mb-4">للشاعر: ${poet.name}</p>
+                                    <div class="poem-text text-gray-800">${poem.text}</div>
+                                    <button class="copy-button mt-4" data-poem-text="${poem.text}" aria-label="نسخ القصيدة">
+                                        <i class="fas fa-copy ml-2"></i> نسخ القصيدة
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        searchResultsContainer.insertAdjacentHTML('beforeend', poemCard);
+                        hasResults = true;
+                    }
+                });
+            }
+
+            if (!hasResults) {
+                noSearchResults.classList.remove('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            addCopyButtonListeners(); // Add copy listeners to new search results
+        });
+
+        // Initialize the view
+        showHomeSection();
     </script>
 </body>
 </html>
