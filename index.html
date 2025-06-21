@@ -6,7 +6,7 @@
     <title>موسوعة الشعر الشعبي العراقي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-R4R/Y8A+Kz/q3F+G9+Y8zF1+W+g7/Q/n6Gz+g/Y7+W8/W9+N7/X6+T7/G6+Z9+F8/V7/T6/F5/R4/V3/T2/G1/Z0/A9/B8/C7/D6/E5/F4/I3/J2/K1/L0/M9/N8/O7/P6/Q5/R4/S3/T2/U1/V0/W9/X8/Y7/Z6/a5/b4/c3/d2/e1/f0/g9/h8/i7/j6/k5/l4/m3/n2/o1/p0/q9/r8/s7/t6/u5/v4/w3/x2/y1/z0" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-R4R/Y8A+Kz/q3F+G9+Y8zF1+W+g7/Q/n6Gz+g/Y7+W8/W9+N7/X6+T7/G6+Z9+F8/V7/T6/F5/R4/V3/T2/G1/Z0/A9/B8/C7/D6/E5/F4/I3/J2/K1/L0/M9/N8/O7/P6/Q5/R4/S3/T2/U1/V0/W9/X8/Y7/Z6/a5/b4/c3/d2/e1/f0/g9/h8/i7/j6/k5/l4/m3/n2/o1/p0/q9/r8/s7/t6/u5/v4/w3/x2/y1/z0/A9/B8/C7/D6/E5/F4/G3/H2/I1/J0/K9/L8/M7/N6/O5/P4/Q3/R2/S1/T0/U9/V8/W7/X6/Y5/Z4/a3/b2/c1/d0/e9/f8/g7/h6/i5/j4/k3/l2/m1/n0/o9/p8/q7/r6/s5/t4/u3/v2/w3/x2/y1/z0" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Global Styles */
         body {
@@ -237,7 +237,7 @@
                 padding: 1rem; /* Smaller card padding on mobile */
             }
             .poetry-card h4 {
-                font-size: 1.25rem;
+                font-size: 1.25rem; /* Smaller card title on mobile */
             }
             .text-5xl { /* Section titles */
                 font-size: 2rem;
@@ -369,6 +369,9 @@
                     <a href="#" data-poet-id="mohammad-alghabban" class="poet-entry">
                         <h3 class="text-gray-800">محمد الغبّان</h3>
                     </a>
+                    <a href="#" data-poet-id="al-jawahiri" class="poet-entry">
+                        <h3 class="text-gray-800">محمد مهدي الجواهري</h3>
+                    </a>
                 </div>
             </section>
 
@@ -400,7 +403,7 @@
             </button>
             <h2 id="dynamic-title" class="text-5xl font-bold text-gray-800 text-center w-full mb-12"></h2>
             <div id="poems-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            </div>
+                </div>
         </section>
 
         <section id="search-results-section" class="hidden-section flex flex-col items-start pt-8">
@@ -409,7 +412,7 @@
             </button>
             <h2 class="text-5xl font-bold text-gray-800 text-center w-full mb-12">نتائج البحث</h2>
             <div id="search-results-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-            </div>
+                </div>
             <p id="no-search-results" class="text-center text-gray-600 text-xl w-full mt-8 hidden">لا توجد نتائج مطابقة لبحثك.</p>
         </section>
 
@@ -554,8 +557,16 @@
             "mohammad-alghabban": {
                 name: "محمد الغبّان",
                 poems: [
-                    { title: "عصفور باليد", text: "عصفور باليد، أحسن من عشره على الشجر،\nوهذا مثل يگولونه، يا ناس، بگلبي.<br>\nلا تركض ورا السراب، تتعب،\nوخليك قنوع باللي موجود عندك.\nالدنيا ما بيها أمان، تتغير كل يوم،\nواللي يبيعك، باعه، لا تشتريه.\nاحفظ نفسك من الشرور،\nوعيش بسلام، ويا رب. ", genres: ["social-wisdom"] },
-                    { title: "سالفة وضحكة", text: "گلتلها يمعودة شبيچ زعلانه؟\nالوجه الحلو ما يلوگله العبوس.\nضحكت گالت الدنيا بس هموم,\nوگلتلها الدنيا ما بيها شي يدوم.\nبس ضحكتچ تسوى كل الدنيا،\nخلي الهموم تولي، عيشي يوم بيوم.", genres: ["humorous-critical"] }
+                    { title: "عصفور باليد", text: "عصفور باليد، أحسن من عشره على الشجر،\nوهذا مثل يگولونه، يا ناس، بگلبي.\nلا تركض ورا السراب، تتعب،\nوخليك قنوع باللي موجود عندك.\nالدنيا ما بيها أمان، تتغير كل يوم،\nواللي يبيعك، باعه، لا تشتريه.\nاحفظ نفسك من الشرور،\nوعيش بسلام، ويا رب. ", genres: ["social-wisdom"] }
+                ]
+            },
+            // محمد مهدي الجواهري
+            "al-jawahiri": {
+                name: "محمد مهدي الجواهري",
+                poems: [
+                    { title: "يا دجلة الخير", text: "يا دجلة الخير يا نبعاً يفيضُ دماً،\nيا دجلة الخير يا أمّ الضحايا كفى.\nما أغنى الله عني دجلة ولا فراتها،\nما أغنى الله عني بصرى ولا كوفاتها.", genres: ["bold-patriotic", "sad-melancholy"] },
+                    { title: "أيها الأرق", text: "أيها الأرقُ ما هذا التمادي بي،\nوما هذا العنادُ فيك من ذهاب؟\nقضيتُ العمرَ لا ألقى سكوناً،\nوراحتْ بي الليالي في عذاب.", genres: ["sad-melancholy", "social-wisdom"] },
+                    { title: "بغداد", text: "يا عروس المجد يا بغداد،\nيا كعبة الدنيا ويا ميعاد.\nعشتِ فينا مجداً وأملاً،\nيا مدينة الخير والإسعاد.", genres: ["bold-patriotic"] }
                 ]
             }
         };
@@ -581,7 +592,9 @@
                     { poetId: "muzaffar-alnawab", poemTitle: "للريل وحمد" },
                     { poetId: "ali-rasham", poemTitle: "دمي يحكي" },
                     { poetId: "ahmed-matar", poemTitle: "نحن باقون" },
-                    { poetId: "ahmed-matar", poemTitle: "لا تشتروا العز" }
+                    { poetId: "ahmed-matar", poemTitle: "لا تشتروا العز" },
+                    { poetId: "al-jawahiri", poemTitle: "يا دجلة الخير" },
+                    { poetId: "al-jawahiri", poemTitle: "بغداد" }
                 ]
             },
             "social-wisdom": {
@@ -594,7 +607,8 @@
                     { poetId: "abd-alhussein-alhalfy", poemTitle: "يا گلبي" },
                     { poetId: "ahmed-matar", poemTitle: "نحن باقون" },
                     { poetId: "ahmed-matar", poemTitle: "لا تشتروا العز" },
-                    { poetId: "mohammad-alghabban", poemTitle: "عصفور باليد" }
+                    { poetId: "mohammad-alghabban", poemTitle: "عصفور باليد" },
+                    { poetId: "al-jawahiri", poemTitle: "أيها الأرق" }
                 ]
             },
             "sad-melancholy": {
@@ -614,244 +628,250 @@
                     { poetId: "raheem-almaliki", poemTitle: "مشت روحي" },
                     { poetId: "abd-alhussein-alhalfy", poemTitle: "يا گلبي" },
                     { poetId: "saheb-aldawiri", poemTitle: "بگت روحي" },
-                    { poetId: "ehab-almaliki", poemTitle: "خلص كلشي" }
-                ] 
+                    { poetId: "ehab-almaliki", poemTitle: "خلص كلشي" },
+                    { poetId: "al-jawahiri", poemTitle: "يا دجلة الخير" },
+                    { poetId: "al-jawahiri", poemTitle: "أيها الأرق" }
+                ]
             },
             "humorous-critical": {
                 name: "شعر فكاهي ونقدي",
                 poemIds: [
-                    { poetId: "mohammad-alghabban", poemTitle: "سالفة وضحكة" }
+                    // Add humorous/critical poems here if available
                 ]
             }
         };
 
-        // DOM elements
+        // Get elements
         const homeSection = document.getElementById('home-section');
         const dynamicContentSection = document.getElementById('dynamic-content');
         const searchResultsSection = document.getElementById('search-results-section');
-        const poemsContainer = document.getElementById('poems-container');
-        const searchResultsContainer = document.getElementById('search-results-container');
         const dynamicTitle = document.getElementById('dynamic-title');
-        const noSearchResults = document.getElementById('no-search-results');
+        const poemsContainer = document.getElementById('poems-container');
         const searchInput = document.getElementById('searchInput');
+        const searchResultsContainer = document.getElementById('search-results-container');
+        const noSearchResults = document.getElementById('no-search-results');
 
-        /**
-         * Hides all main content sections and displays the specified one.
-         * @param {HTMLElement} sectionToShow - The section element to display.
-         */
-        function showSection(sectionToShow) {
-            // Hide all sections
+        // Navigation Buttons
+        document.getElementById('home-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('home');
+        });
+        document.getElementById('nav-poets').addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('home'); // Poets are on the home section
+            document.getElementById('poets-directory').scrollIntoView({ behavior: 'smooth' });
+        });
+        document.getElementById('nav-genres').addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection('home'); // Genres are on the home section
+            document.getElementById('poetry-genres').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => showSection('home'));
+        document.getElementById('back-from-search-button').addEventListener('click', () => showSection('home'));
+
+        // Function to show/hide sections
+        function showSection(section) {
             homeSection.classList.add('hidden-section');
             dynamicContentSection.classList.add('hidden-section');
             searchResultsSection.classList.add('hidden-section');
 
-            // Show the requested section
-            sectionToShow.classList.remove('hidden-section');
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top for new section
-        }
-
-        /**
-         * Creates a poem card HTML element.
-         * @param {Object} poem - The poem object.
-         * @param {string} poetName - The name of the poet.
-         * @returns {HTMLElement} The created poem card element.
-         */
-        function createPoemCard(poem, poetName) {
-            const card = document.createElement('div');
-            card.className = 'poetry-card bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 fade-in-slide-rtl';
-            card.setAttribute('dir', 'rtl'); // Ensure RTL for card content
-
-            let genreBadges = '';
-            if (poem.genres && poem.genres.length > 0) {
-                genreBadges = poem.genres.map(genreId => {
-                    const genreName = genresData[genreId] ? genresData[genreId].name : genreId;
-                    return `<span class="inline-block bg-orange-100 text-orange-700 text-xs px-3 py-1 rounded-full ml-2">${genreName}</span>`;
-                }).join('');
+            if (section === 'home') {
+                homeSection.classList.remove('hidden-section');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (section === 'dynamic') {
+                dynamicContentSection.classList.remove('hidden-section');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (section === 'search') {
+                searchResultsSection.classList.remove('hidden-section');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-
-            card.innerHTML = `
-                <h4 class="text-2xl font-semibold text-gray-800 mb-2">${poem.title}</h4>
-                <p class="text-gray-600 text-lg mb-4">لـ ${poetName}</p>
-                <div class="mb-4">${genreBadges}</div>
-                <p class="poem-text text-gray-700 text-right text-base md:text-lg leading-loose mb-4">${poem.text}</p>
-                <button class="copy-button flex items-center justify-center">
-                    <i class="fas fa-copy ml-2"></i> نسخ القصيدة
-                </button>
-            `;
-            
-            const copyButton = card.querySelector('.copy-button');
-            copyButton.addEventListener('click', () => {
-                const textToCopy = `${poem.title}\nلـ ${poetName}\n\n${poem.text}`;
-                // Using document.execCommand('copy') as navigator.clipboard.writeText might not work in sandboxed iframes.
-                const textArea = document.createElement('textarea');
-                textArea.value = textToCopy;
-                textArea.style.position = 'fixed'; // Avoid scrolling to bottom
-                textArea.style.opacity = '0';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    copyButton.textContent = 'تم النسخ!';
-                    copyButton.classList.add('copied');
-                    setTimeout(() => {
-                        copyButton.innerHTML = '<i class="fas fa-copy ml-2"></i> نسخ القصيدة';
-                        copyButton.classList.remove('copied');
-                    }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    // Fallback for environments where execCommand is not supported or fails.
-                    // A custom modal could be used here instead of an alert
-                    alert('فشل نسخ النص. يرجى النسخ يدوياً.');
-                } finally {
-                    document.body.removeChild(textArea);
-                }
-            });
-
-            return card;
         }
 
-        /**
-         * Displays a list of poems in the specified container.
-         * @param {Array<Object>} poems - Array of poem objects to display.
-         * @param {string} title - Title for the displayed section.
-         * @param {HTMLElement} container - The DOM element to append poems to.
-         * @param {HTMLElement} targetSection - The main section to show (dynamic-content or search-results-section).
-         */
-        function displayPoems(poems, title, container, targetSection) {
-            container.innerHTML = ''; // Clear previous content
-            dynamicTitle.textContent = title;
-            
-            if (poems.length === 0) {
-                noSearchResults.classList.remove('hidden');
-            } else {
-                noSearchResults.classList.add('hidden');
-                poems.forEach((poem, index) => {
-                    const poetName = poetsData[poem.poetId] ? poetsData[poem.poetId].name : 'شاعر غير معروف';
-                    const card = createPoemCard(poem.poemData, poetName);
-                    card.style.animationDelay = `${index * 0.1}s`; // Stagger animation
-                    container.appendChild(card);
-                    // Trigger animation class after appending
-                    setTimeout(() => card.classList.add('animate-in'), 10);
-                });
-            }
-            showSection(targetSection);
-        }
-
-        // --- Navigation and Dynamic Content Handling ---
-
-        // Event listener for Home link
-        document.getElementById('home-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection(homeSection);
-        });
-
-        // Event listener for Poets navigation link - scrolls to poets directory
-        document.getElementById('nav-poets').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection(homeSection);
-            document.getElementById('poets-directory').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // Event listener for Genres navigation link - scrolls to poetry genres
-        document.getElementById('nav-genres').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection(homeSection);
-            document.getElementById('poetry-genres').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        // Event listener for general back buttons
-        document.getElementById('back-button').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection(homeSection);
-            searchInput.value = ''; // Clear search when going back from dynamic content
-        });
-
-        document.getElementById('back-from-search-button').addEventListener('click', (e) => {
-            e.preventDefault();
-            showSection(homeSection);
-            searchInput.value = ''; // Clear search when going back from search results
-        });
-
-
-        // Event listeners for Poet Entries
-        document.querySelectorAll('.poet-entry').forEach(entry => {
-            entry.addEventListener('click', function(e) {
+        // Render Poet Poems
+        document.querySelectorAll('.poet-entry').forEach(poetLink => {
+            poetLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                const poetId = this.dataset.poetId;
+                const poetId = poetLink.dataset.poetId;
                 const poet = poetsData[poetId];
+
                 if (poet) {
-                    const poemsToDisplay = poet.poems.map(p => ({ poetId: poetId, poemData: p }));
-                    displayPoems(poemsToDisplay, `قصائد الشاعر: ${poet.name}`, poemsContainer, dynamicContentSection);
+                    dynamicTitle.textContent = `قصائد الشاعر: ${poet.name}`;
+                    poemsContainer.innerHTML = ''; // Clear previous poems
+
+                    if (poet.poems && poet.poems.length > 0) {
+                        poet.poems.forEach((poem, index) => {
+                            const poemCard = `
+                                <div class="poetry-card bg-white rounded-lg shadow-md p-6 animate-fade-in fade-in-slide-rtl" style="animation-delay: ${index * 0.1}s;">
+                                    <h4 class="text-2xl font-bold text-orange-600 mb-3">${poem.title}</h4>
+                                    <p class="poem-text text-gray-700 mb-4">${poem.text}</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        ${poem.genres.map(genre => `<span class="bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded-full">${genresData[genre] ? genresData[genre].name : genre}</span>`).join('')}
+                                    </div>
+                                    <button class="copy-button" data-poem-text="${poem.text}">نسخ القصيدة</button>
+                                </div>
+                        `;
+                        poemsContainer.insertAdjacentHTML('beforeend', poemCard);
+                        setTimeout(() => {
+                            document.querySelector('.poetry-card:last-child').classList.add('animate-in');
+                        }, 10); // Small delay to trigger animation
+                        
+                        // Add copy functionality to the new button
+                        const copyButton = poemsContainer.querySelector('.poetry-card:last-child .copy-button');
+                        copyButton.addEventListener('click', () => {
+                            navigator.clipboard.writeText(copyButton.dataset.poemText).then(() => {
+                                const originalText = copyButton.textContent;
+                                copyButton.textContent = 'تم النسخ!';
+                                copyButton.classList.add('copied');
+                                setTimeout(() => {
+                                    copyButton.textContent = originalText;
+                                    copyButton.classList.remove('copied');
+                                }, 1500);
+                            }).catch(err => {
+                                console.error('Failed to copy text: ', err);
+                            });
+                        });
+                        });
+                    } else {
+                        poemsContainer.innerHTML = `<p class="text-center text-gray-600 text-xl w-full">لا توجد قصائد متوفرة لهذا الشاعر حاليًا.</p>`;
+                    }
+                    showSection('dynamic');
                 }
             });
         });
 
-        // Event listeners for Genre Entries
-        document.querySelectorAll('.genre-entry').forEach(entry => {
-            entry.addEventListener('click', function(e) {
+        // Render Genre Poems
+        document.querySelectorAll('.genre-entry').forEach(genreLink => {
+            genreLink.addEventListener('click', (e) => {
                 e.preventDefault();
-                const genreId = this.dataset.genreId;
+                const genreId = genreLink.dataset.genreId;
                 const genre = genresData[genreId];
+
                 if (genre) {
-                    const poemsToDisplay = genre.poemIds.map(poemRef => {
-                        const poet = poetsData[poemRef.poetId];
-                        if (poet) {
-                            const foundPoem = poet.poems.find(p => p.title === poemRef.poemTitle);
-                            if (foundPoem) {
-                                return { poetId: poemRef.poetId, poemData: foundPoem };
+                    dynamicTitle.textContent = `قصائد في قسم: ${genre.name}`;
+                    poemsContainer.innerHTML = ''; // Clear previous poems
+
+                    if (genre.poemIds && genre.poemIds.length > 0) {
+                        genre.poemIds.forEach((poemRef, index) => {
+                            const poet = poetsData[poemRef.poetId];
+                            const poem = poet ? poet.poems.find(p => p.title === poemRef.poemTitle) : null;
+
+                            if (poem) {
+                                const poemCard = `
+                                    <div class="poetry-card bg-white rounded-lg shadow-md p-6 animate-fade-in fade-in-slide-rtl" style="animation-delay: ${index * 0.1}s;">
+                                        <h4 class="text-2xl font-bold text-orange-600 mb-3">${poem.title} <span class="text-lg text-gray-500">- ${poet.name}</span></h4>
+                                        <p class="poem-text text-gray-700 mb-4">${poem.text}</p>
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            ${poem.genres.map(g => `<span class="bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded-full">${genresData[g] ? genresData[g].name : g}</span>`).join('')}
+                                        </div>
+                                        <button class="copy-button" data-poem-text="${poem.text}">نسخ القصيدة</button>
+                                </div>
+                            `;
+                                poemsContainer.insertAdjacentHTML('beforeend', poemCard);
+                                setTimeout(() => {
+                                    document.querySelector('.poetry-card:last-child').classList.add('animate-in');
+                                }, 10);
+                                const copyButton = poemsContainer.querySelector('.poetry-card:last-child .copy-button');
+                                copyButton.addEventListener('click', () => {
+                                    navigator.clipboard.writeText(copyButton.dataset.poemText).then(() => {
+                                        const originalText = copyButton.textContent;
+                                        copyButton.textContent = 'تم النسخ!';
+                                        copyButton.classList.add('copied');
+                                        setTimeout(() => {
+                                            copyButton.textContent = originalText;
+                                            copyButton.classList.remove('copied');
+                                        }, 1500);
+                                    }).catch(err => {
+                                        console.error('Failed to copy text: ', err);
+                                    });
+                                });
                             }
-                        }
-                        return null;
-                    }).filter(p => p !== null); // Filter out any nulls if poems not found
-                    displayPoems(poemsToDisplay, `شعر من نوع: ${genre.name}`, poemsContainer, dynamicContentSection);
+                        });
+                    } else {
+                        poemsContainer.innerHTML = `<p class="text-center text-gray-600 text-xl w-full">لا توجد قصائد متوفرة لهذا النوع حاليًا.</p>`;
+                    }
+                    showSection('dynamic');
                 }
             });
         });
 
-        // --- Search Functionality ---
-
+        // Search Functionality
         searchInput.addEventListener('input', function() {
             const searchTerm = this.value.trim().toLowerCase();
-            
-            if (searchTerm === '') {
-                showSection(homeSection); // Go back to home if search is cleared
+            searchResultsContainer.innerHTML = '';
+            noSearchResults.classList.add('hidden');
+
+            if (searchTerm.length === 0) {
+                showSection('home');
                 return;
             }
 
-            const matchedPoems = [];
+            let foundResults = false;
+            let poemIndex = 0; // To control animation delay
 
             for (const poetId in poetsData) {
                 const poet = poetsData[poetId];
-                // Check if poet name matches
+                // Search poet name
                 if (poet.name.toLowerCase().includes(searchTerm)) {
-                    // Add all poems by this poet if poet name matches
                     poet.poems.forEach(poem => {
-                        matchedPoems.push({ poetId: poetId, poemData: poem });
+                        const poemCard = `
+                            <div class="poetry-card bg-white rounded-lg shadow-md p-6 animate-fade-in fade-in-slide-rtl" style="animation-delay: ${poemIndex++ * 0.1}s;">
+                                <h4 class="text-2xl font-bold text-orange-600 mb-3">${poem.title} <span class="text-lg text-gray-500">- ${poet.name}</span></h4>
+                                <p class="poem-text text-gray-700 mb-4">${poem.text}</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    ${poem.genres.map(genre => `<span class="bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded-full">${genresData[genre] ? genresData[genre].name : genre}</span>`).join('')}
+                                </div>
+                                <button class="copy-button" data-poem-text="${poem.text}">نسخ القصيدة</button>
+                            </div>
+                        `;
+                        searchResultsContainer.insertAdjacentHTML('beforeend', poemCard);
+                        foundResults = true;
                     });
                 } else {
-                    // Check individual poems for title or text match
+                    // Search poem titles and text
                     poet.poems.forEach(poem => {
                         if (poem.title.toLowerCase().includes(searchTerm) || poem.text.toLowerCase().includes(searchTerm)) {
-                            matchedPoems.push({ poetId: poetId, poemData: poem });
+                            const poemCard = `
+                                <div class="poetry-card bg-white rounded-lg shadow-md p-6 animate-fade-in fade-in-slide-rtl" style="animation-delay: ${poemIndex++ * 0.1}s;">
+                                    <h4 class="text-2xl font-bold text-orange-600 mb-3">${poem.title} <span class="text-lg text-gray-500">- ${poet.name}</span></h4>
+                                    <p class="poem-text text-gray-700 mb-4">${poem.text}</p>
+                                    <div class="flex flex-wrap gap-2 mb-4">
+                                        ${poem.genres.map(genre => `<span class="bg-gray-200 text-gray-700 text-sm px-2 py-1 rounded-full">${genresData[genre] ? genresData[genre].name : genre}</span>`).join('')}
+                                    </div>
+                                    <button class="copy-button" data-poem-text="${poem.text}">نسخ القصيدة</button>
+                            </div>
+                        `;
+                            searchResultsContainer.insertAdjacentHTML('beforeend', poemCard);
+                            foundResults = true;
                         }
                     });
                 }
             }
+            // Add copy functionality to all new buttons in search results
+            searchResultsContainer.querySelectorAll('.copy-button').forEach(copyButton => {
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(copyButton.dataset.poemText).then(() => {
+                        const originalText = copyButton.textContent;
+                        copyButton.textContent = 'تم النسخ!';
+                        copyButton.classList.add('copied');
+                        setTimeout(() => {
+                            copyButton.textContent = originalText;
+                            copyButton.classList.remove('copied');
+                        }, 1500);
+                    }).catch(err => {
+                        console.error('Failed to copy text: ', err);
+                    });
+                });
+            });
 
-            // Remove duplicates based on poetId and poemTitle
-            const uniqueMatchedPoems = Array.from(new Map(matchedPoems.map(item =>
-                [`${item.poetId}-${item.poemData.title}`, item]
-            )).values());
-
-            displayPoems(uniqueMatchedPoems, 'نتائج البحث', searchResultsContainer, searchResultsSection);
+            if (foundResults) {
+                showSection('search');
+            } else {
+                noSearchResults.classList.remove('hidden');
+                showSection('search');
+            }
         });
-
-        // Initial setup: ensure home section is visible on load
-        document.addEventListener('DOMContentLoaded', () => {
-            showSection(homeSection);
-        });
-
     </script>
+
 </body>
 </html>
